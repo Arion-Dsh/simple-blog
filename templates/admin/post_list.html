@@ -1,0 +1,68 @@
+<%inherit file="base.html"/>
+
+<%block name="mian_body">
+<div class="pure-u-3-4 main-content">
+	<div class="pure-g post-items-heading l-lbox">
+		<div class="pure-u-1-6">
+			时间
+		</div>
+		<div class="pure-u-13-24">
+			标题
+		</div>
+		<div class="pure-u-1-12">
+			active
+		</div>
+		<div class="pure-u-5-24">
+			操作
+		</div>
+	</div>
+	%for post in posts._list:
+	<div class="pure-g post-items l-lbox">
+		<div class="pure-u-1-6">
+			${post.created_at.strftime('%H:%M %m-%d')}
+		</div>
+		<div class="pure-u-13-24">
+			<a href="${reverse_url('post_edit', post.slug)}">${post.title}</a>
+		</div>
+		<div class="pure-u-1-12">
+        	%if post.active == True:
+			<i class="icon-ok"></i> 
+			%else:
+			<i class="icon-remove"></i>
+			%endif
+		</div>
+		<div class="pure-u-5-24">
+			<a href="${reverse_url('post_del', post.slug)}">删除</a>
+			<a href="${reverse_url('post_edit', post.slug)}">编辑</a>
+			<a href="${reverse_url('post', post.slug)}">预览</a>
+		</div>
+	</div>
+	%endfor
+	
+	<div class="pure-g post-items-footer">
+		%if posts.pages != 1:
+		<div class="pure-u-1">
+			<ul class="pure-paginator">
+				%if posts.has_prev:	
+			    <li>
+					<a class="pure-button prev" href="${reverse_url('admin', posts.prev_num)}">&#171;</a>
+				</li>
+				%endif
+				%for page in posts.iter_pages( left_edge=0, left_current=0,right_current=1, right_edge=0):
+					%if page:
+						%if page != posts.page:
+			    		<li><a class="pure-button" href="${reverse_url('admin', page)}">${page}</a></li>
+						%else:
+			    		<li><a class="pure-button pure-button-active" href="${reverse_url('admin', page)}">${page}</a></li>
+						%endif
+					%endif
+				%endfor
+				%if posts.has_next:
+			    <li><a class="pure-button next" href="${reverse_url('admin', posts.next_num)}">&#187;</a></li>
+				%endif
+			</ul>
+		</div>
+		%endif
+	</div>
+</div>
+</%block>

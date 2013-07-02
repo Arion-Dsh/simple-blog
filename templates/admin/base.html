@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>arion's'</title>
+	<link rel="stylesheet" href="${static_url("pure-min.css")}" type="text/css"charset="utf-8">
+	<link rel="stylesheet" href="${static_url("admin/css/style_admin.css")}" type="text/css"charset="utf-8">	
+	<link rel="stylesheet" href="${static_url("font-awesome.min.css")}"type="text/css"charset="utf-8">
+	
+</head>
+<body>
+	<div class="wrapper">
+		<%include file="header.html"/> 
+		<div class="pure-g-r" id="content">
+			<%include file="aside.html"/>
+			<%block name="mian_body"/>			
+		</div>
+		<%include file="footer.html"/> 
+	</div>
+</body>

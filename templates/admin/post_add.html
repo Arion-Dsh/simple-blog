@@ -1,0 +1,125 @@
+<%inherit file="base.html"/>
+
+<%block name="mian_body">
+
+
+
+
+<div class="pure-u-3-4 main-content">
+	<div class="pure-g-r post-add-wrapper l-box">
+		<div class="pure-u-5-6">
+			<div class="l-rbox">
+				<form class="pure-form pure-form-stacked" method="post">
+			    <fieldset>
+					<legend>添加文章</legend>
+					<div class="pure-g-r">
+						<div class="pure-u-3-4">
+							<div class="l-rbox">
+					            <label for="title">${form.title.label}</label>
+								${form.title(class_="pure-input-1")}
+								%if form.title.errors:
+									%for error in form.title.errors:
+									<p class="pure-button-error">
+									    <i class="icon-remove"></i>
+									    ${error}
+									</p>
+									%endfor
+								%endif
+							</div>							            
+						</div>
+						<div class="pure-u-1-6">
+			                <label for="category">${form.category.label}</label>
+							${form.category(class_="pure-input-medium")}									
+						</div>
+					</div>
+					<div class="pure-g-r">
+						<div class="pure-u-3-4">
+							<div class="l-rbox">
+					            <label for="tags">${form.tags.label}</label>
+								${form.tags(class_="pure-input-1")}
+								%if form.tags.errors:
+									%for error in form.tags.errors:
+									<p class="pure-button-error">
+									    <i class="icon-remove"></i>
+									    ${error}
+									</p>
+									%endfor
+								%endif
+							</div>							            
+						</div>
+						<div class="pure-u-1-6">
+			                <label for="category">${form.active.label}</label>
+							${form.active(class_="pure-input-medium")}									
+						</div>
+					</div>
+					<div class="pure-u-1">
+						<label for="description">${form.description.label}</label>
+						${form.description(class_="pure-input-1", rows=5)}
+						%if form.description.errors:
+							%for error in form.description.errors:
+							<p class="pure-button-error">
+							    <i class="icon-remove"></i>
+							    ${error}
+							</p>
+							%endfor
+						%endif
+					</div>
+
+					<div class="pure-u-1">
+						<label for="body">${form.body.label}</label>
+						${form.body(class_="pure-input-1", rows=5)}
+		
+					</div>
+					<div class="pure-u-1 hidden">
+						<div class="pure-u-1 images-list">
+							%for images in form.images:
+							${images}
+							%endfor
+						</div>
+						
+		
+					</div>
+			            <button type="submit" class="pure-button">Submit</button>
+			    </fieldset>
+			</form>
+			</div>
+		</div>
+		<div class="pure-u-1-6 upload-wrapper">
+			%if form.images.data:
+			 
+				%for images in form.images.data:
+					<div class="upload-img-list-${form.images.data.index(images)}">
+					<button class="pure-button pure-button-success hidden " id="upload-${form.images.data.index(images)}">+</button>
+					<img src="${images}">
+					<i class="icon-remove" path="${images}"></i>	
+					</div>
+					%if len(form.images.data) < 4 :
+					<div class="upload-img-list-${form.images.data.index(images)+1}">
+					<button class="pure-button pure-button-success " id="upload-${form.images.data.index(images)+1}">+</button>
+					</div>
+					%endif
+				%endfor
+			%else:
+			<div class="upload-img-list-0">
+			<button class="pure-button pure-button-success " id="upload-0">+</button>
+			</div>
+			%endif
+
+		</div>
+	</div>	
+</div>
+<script src="${static_url("admin/js/ueditor/editor_config.js")}" type="text/javascript" charset="utf-8"></script>
+<script src="${static_url("admin/js/ueditor/ueditor_min.js")}" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="${static_url("admin/js/ueditor/themes/loftskin/ueditor.css")}"/>
+
+<script type="text/javascript" charset="utf-8">
+UEDITOR_CONFIG.focus = true;
+var uEditor_Instance = new baidu.editor.ui.Editor();
+uEditor_Instance.render('body');
+uEditor_Instance.focus();
+</script>
+<script
+    src="${static_url("src/seajs/sea.js")}" data-config="config" data-main="admin_main"> 
+</script>
+
+</%block>

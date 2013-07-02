@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title></title>
+	<link rel="stylesheet" href="${static_url("pure-min.css")}">
+	<link rel="stylesheet" href="${static_url("post/css/email.css")}">
+	<script
+	    src="${static_url("src/seajs/sea.js")}" data-config="config" data-main="post_main"> 
+	</script>
+
+
+</head>
+<body>
+
+
+
+
+<div class="pure-g-r content" id="layout">
+<%include file="nav.html"/> 
+
+    <div class="pure-u" id="list">
+        <div class="content">
+
+			%for post in posts._list:
+            <div class="email-item pure-g">
+                <div class="pure-u">
+                    <img class="email-avatar" alt="Reid Burke's avatar" src="/img/common/reid-avatar.png" height="64" width="64"/>
+                </div>
+
+                <div class="pure-u-3-4">
+                    
+                    <h4 class="email-subject">
+						<a href="${reverse_url('post',post.slug)}">${post.title}</a>
+					</h4>
+                    <div class="email-desc">
+                        ${post.description}
+					</div>
+                </div>
+            </div>
+			%endfor
+			
+			%if posts.pages != 1:
+			<div class="pure-u-1" id="paginator">
+				<ul class="pure-paginator">
+					%if posts.has_prev:	
+				    <li>
+						<a class="pure-button prev" href="${reverse_url('page_list', posts.prev_num)}">&#171;</a>
+					</li>
+					%endif
+					%for page in posts.iter_pages( left_edge=0, left_current=0,right_current=1, right_edge=0):
+						%if page:
+							%if page != posts.page:
+				    		<li><a class="pure-button" href="${reverse_url('page_list', page)}">${page}</a></li>
+							%else:
+				    		<li><a class="pure-button pure-button-active" href="${reverse_url('page_list', page)}">${page}</a></li>
+							%endif
+						%endif
+					%endfor
+					%if posts.has_next:
+				    <li><a class="pure-button next" href="${reverse_url('page_list', posts.next_num)}">&#187;</a></li>
+					%endif
+				</ul>
+			</div>
+			%endif
+        </div>
+    </div>
+    <div class="pure-u" id="main">
+        <div class="content">
+            <div class="email-content pure-g">
+                <div class="email-content-header pure-g">
+                    <div class="pure-u-1-2">
+                        <h1 class="email-content-title">${node.alias}</h1>
+
+                    </div>
+
+                    <!-- <div class="pure-u-1-2 email-content-controls">
+                        <p class="email-content-subtitle">
+                            <span</span>
+						</p>
+                    	 <button class="pure-button secondary-button">Reply</button>
+                        <button class="pure-button secondary-button">Forward</button>
+                        <button class="pure-button secondary-button">Move to</button> 
+                    </div>  -->
+                </div>
+
+                <div class="email-content-body pure-u-1">
+					${node.description}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
