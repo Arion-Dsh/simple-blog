@@ -1,0 +1,154 @@
+
+<!doctype html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title></title>
+	<link rel="stylesheet" href="${static_url("pure-min.css")}">
+	<link rel="stylesheet" href="${static_url("post/css/email.css")}">	
+	<script
+	    src="${static_url("src/seajs/sea.js")}" data-config="config" data-main="post_main"> 
+	</script>
+
+</head>
+<body>
+
+
+
+
+<div class="pure-g-r content" id="layout">
+<%include file="nav.html"/> 
+
+    <div class="pure-u" id="list">
+        <div class="content">
+            <!-- <div class="email-item email-item-selected pure-g">
+                <div class="pure-u">
+                    <img class="email-avatar" alt="Tilo Mitra's avatar" src="/img/common/tilo-avatar.png" height="64" width="64">
+                </div>
+
+                <div class="pure-u-3-4">
+                    <h5 class="email-name">Tilo Mitra</h5>
+                    <h4 class="email-subject">Hello from Toronto</h4>
+                    <p class="email-desc">
+                        Hey, I just wanted to check in with you from Toronto. I got here earlier today.
+                    </p>
+                </div>
+            </div>
+
+            <div class="email-item email-item-unread pure-g">
+                <div class="pure-u">
+                    <img class="email-avatar" alt="Eric Ferraiuolo's avatar" src="/img/common/ericf-avatar.png" height="64" width="64">
+                </div>
+
+                <div class="pure-u-3-4">
+                    <h5 class="email-name">Eric Ferraiuolo</h5>
+                    <h4 class="email-subject">Re: Pull Requests</h4>
+                    <p class="email-desc">
+                        Hey, I had some feedback for pull request #51. We should center the menu so it looks better on mobile.
+                    </p>
+                </div>
+            </div>
+
+            <div class="email-item email-item-unread pure-g">
+                <div class="pure-u">
+                    <img class="email-avatar" alt="YUI's avatar" src="/img/common/yui-avatar.png" height="64" width="64"/>
+                </div>
+
+                <div class="pure-u-3-4">
+                    <h5 class="email-name">YUI Library</h5>
+                    <h4 class="email-subject">You have 5 bugs assigned to you</h4>
+                    <p class="email-desc">
+                        Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla.
+                    </p>
+                </div>
+            </div> -->
+			%for post in posts._list:
+            <div class="email-item pure-g">
+				%if post.images:
+                <div class="pure-u">
+                    <img class="email-avatar" alt="Reid Burke's avatar" src="/img/common/reid-avatar.png" height="64" width="64"/>
+                </div>
+				 <div class="pure-u-3-4">
+				%else:
+				 <div class="pure-u-1">
+				%endif
+                    
+                    <h4 class="email-subject">
+						<a href="${reverse_url('post',post.slug)}">${post.title}</a>
+					</h4>
+                    <p class="email-desc">
+                        ${post.description}
+					</p>
+                </div>
+            </div>
+			%endfor
+			
+			%if posts.pages != 1:
+			<div class="pure-u-1" id="paginator">
+				<ul class="pure-paginator">
+					%if posts.has_prev:	
+				    <li>
+						<a class="pure-button prev" href="${reverse_url('category_list', node.name, posts.prev_num)}">&#171;</a>
+					</li>
+					%endif
+					%for page in posts.iter_pages( left_edge=0, left_current=0,right_current=1, right_edge=0):
+						%if page:
+							%if page != posts.page:
+				    		<li><a class="pure-button" href="${reverse_url('category_list', node.name, page)}">${page}</a></li>
+							%else:
+				    		<li><a class="pure-button pure-button-active" href="${reverse_url('category_list', node.name, page)}">${page}</a></li>
+							%endif
+						%endif
+					%endfor
+					%if posts.has_next:
+				    <li><a class="pure-button next" href="${reverse_url('category_list', node.name, posts.next_num)}">&#187;</a></li>
+					%endif
+				</ul>
+			</div>
+			%endif
+        </div>
+    </div>
+    <div class="pure-u" id="main">
+        <div class="content">
+            <div class="email-content pure-g">
+                <div class="email-content-header pure-g">
+                    <div class="pure-u-1-2">
+                        <h1 class="email-content-title">${node.alias}</h1>
+
+                    </div>
+
+                    <!-- <div class="pure-u-1-2 email-content-controls">
+                        <p class="email-content-subtitle">
+                            <span</span>
+						</p>
+                    	 <button class="pure-button secondary-button">Reply</button>
+                        <button class="pure-button secondary-button">Forward</button>
+                        <button class="pure-button secondary-button">Move to</button> 
+                    </div>  -->
+                </div>
+
+                <div class="email-content-body pure-u-1">
+					%if node.images:
+						%if len(node.images) == 1:
+							<div class="pure-u images-wrapper">
+								%for img in node.images:
+								<img src="${img}" />
+								%endfor
+							</div>
+						%else:
+						
+						%endif
+					%endif
+					${node.description}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

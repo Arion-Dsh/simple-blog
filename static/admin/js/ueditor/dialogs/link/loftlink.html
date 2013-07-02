@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>插入链接</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" src="../internal.js"></script>
+    <style type="text/css">
+    	html,body{background:#fff;}
+    	body{padding:0;margin:0;font-family:"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";}
+        .linkFields{padding:10px 0 0 16px;}
+		.linkFields .ttl{padding-bottom:8px;color:#555;font-size:14px;}
+		.linkFields input{width:376px;height:28px;line-height:28px;margin-bottom:20px;color:#444;border:1px solid #CECECF;background:#fff url("http://l.bst.126.net/rsc/img/shadow-in.png") no-repeat;}
+    </style>
+</head>
+<body>
+<div class="linkFields">
+    <div class="ttl">链接地址</div>
+	<input class="linkaddr" id="linkaddr" type="text" />
+</div>
+<script type="text/javascript">
+    
+    var link = editor.selection.getRange().collapsed ? editor.queryCommandValue( "link" ) : editor.selection.getStart(),url;
+    link = domUtils.findParentByTagName( link, "a", true );
+    if(link){
+        url = link.getAttribute( 'data_ue_src' ) || link.getAttribute( 'href', 2 );
+    }
+	
+	$G("linkaddr").value = url || '';
+    
+    var ipt = $G("linkaddr");
+    $focus(ipt);
+   
+    function handleDialogOk(){
+        var href;
+		if(href = $G('linkaddr').value.replace(/^\s+|\s+$/g, '')){
+			if(href.indexOf('http')!=0){
+				href = 'http://' + href;
+			}
+            editor.execCommand('link', {
+                'href' : href,
+                'target' : "_blank",
+                'title' : ""
+            });
+            dialog.close();
+        }else{
+            alert('请输入合法的链接地址！');
+			return false;
+        }
+
+    }
+    dialog.onok = handleDialogOk;
+    $G('linkaddr').onkeydown = function(evt){
+        evt = evt || window.event;
+        if (evt.keyCode == 13) {
+            handleDialogOk();
+            return false;
+        }
+    };
+	
+</script>
+</body>
+</html>
