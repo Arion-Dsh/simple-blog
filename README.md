@@ -13,7 +13,7 @@ mongotor(异步mongodb）
 
 部署在ubuntu上 使用tornado+ngnix.
 
-帮看下ngnix配置对不？为什么ip能访问，域名不能访问。。
+帮看下ngnix配置对不？为什么ip能访问，域名不能访问。。(以能访问，清除了下服务员的dns缓存)
 
 页面没有做完 慢慢补充吧。
 
