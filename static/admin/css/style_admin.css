@@ -1,5 +1,5 @@
 body {
-    font-family: sans-serif;
+    font-family: "Lucida Grande", /*"Lucida Sans Unicode",*/ Helvetica, Arial, Verdana, sans-serif;
     color: #777;
 }
 .wrapper,
