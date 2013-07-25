@@ -29,7 +29,6 @@ class Index(BaseHandler):
         posts_found = yield gen.Task(Post.objects.find,{'active': True}, sort=({"_id": -1}))
         posts = Paginate(posts_found, page, 7)
         node = yield gen.Task(Category.objects.find_one,{"name":"index"})
-        self.set_secure_cookie("paginate_page", unicode(page))
         self.render('post/index.html', posts=posts, node=node)
 
 class PostCategory(BaseHandler):
@@ -52,8 +51,6 @@ class Node(BaseHandler):
     def get(self, slug, page=1):
         node = yield gen.Task(Post.objects.find_one,{'slug':slug})
         post_list = yield gen.Task(Post.objects.find,{'active': True, 'category':node.category}, sort=({"_id": -1}))
-        if self.get_secure_cookie("paginate_page"):
-            page = self.get_secure_cookie("paginate_page")
         posts = Paginate(post_list, page, 7)       
         self.render('post/email.html',node=node, posts=posts)
         
@@ -242,8 +239,18 @@ class FileHandler(tornado.web.RequestHandler):
         b = open(fullpath, 'w')
         b.write(f.get('body', ''))
         b.close
-        self.write(rpath)
-                 
+        self.write(filename)
+
+class FileDel(tornado.web.RequestHandler):
+ 
+    def get(self):
+        filename = self.get_argument('filename')
+        fullpath = UPLOAD_PATH+"/"+filename
+        os.remove(fullpath)
+        
+
+
+                  
         
               
 

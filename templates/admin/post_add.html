@@ -70,14 +70,14 @@
 						${form.body(class_="pure-input-1", rows=5)}
 		
 					</div>
-					<div class="pure-u-1 hidden">
-						<div class="pure-u-1 images-list">
+					<div class="pure-u-1 images-list hidden">
 							%for images in form.images:
 							${images}
-							%endfor
-						</div>
-						
+							%endfor					
 		
+					</div>
+					<div class="xsrf">
+						${ xsrf_form_html() }
 					</div>
 			            <button type="submit" class="pure-button">Submit</button>
 			    </fieldset>
@@ -85,25 +85,15 @@
 			</div>
 		</div>
 		<div class="pure-u-1-6 upload-wrapper">
+			
+			<div class="upload-img">
+			<button class="pure-button pure-button-success " id="upload-0" >+</button>
 			%if form.images.data:
-			 
 				%for images in form.images.data:
-					<div class="upload-img-list-${form.images.data.index(images)}">
-					<button class="pure-button pure-button-success hidden " id="upload-${form.images.data.index(images)}">+</button>
-					<img src="${images}">
-					<i class="icon-remove" path="${images}"></i>	
-					</div>
-					%if len(form.images.data) < 4 :
-					<div class="upload-img-list-${form.images.data.index(images)+1}">
-					<button class="pure-button pure-button-success " id="upload-${form.images.data.index(images)+1}">+</button>
-					</div>
-					%endif
+					<img src="/upload/${images}" rola='${images}'>
 				%endfor
-			%else:
-			<div class="upload-img-list-0">
-			<button class="pure-button pure-button-success " id="upload-0">+</button>
+			%endif:
 			</div>
-			%endif
 
 		</div>
 	</div>	
@@ -113,10 +103,10 @@
 <link rel="stylesheet" type="text/css" href="${static_url("admin/js/ueditor/themes/loftskin/ueditor.css")}"/>
 
 <script type="text/javascript" charset="utf-8">
-UEDITOR_CONFIG.focus = true;
-var uEditor_Instance = new baidu.editor.ui.Editor();
-uEditor_Instance.render('body');
-uEditor_Instance.focus();
+// UEDITOR_CONFIG.focus = true;
+// var uEditor_Instance = new baidu.editor.ui.Editor();
+// uEditor_Instance.render('body');
+// uEditor_Instance.focus();
 </script>
 <script
     src="${static_url("src/seajs/sea.js")}" data-config="config" data-main="admin_main"> 

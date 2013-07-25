@@ -6,7 +6,7 @@ import tornado.web
 from tornado import gen
 from wtforms import *
 from core.form import Form
-from core.field import TagListField
+from core.field import TagListField 
 from wtforms.validators import ValidationError, email, required
 
 
@@ -45,7 +45,7 @@ class PostForm(Form):
     tags = TagListField()    
     active = SelectField(choices=[('True', 'Ture'), ('False', 'False')])
     description = TextAreaField(validators=[required()])
-    images = FieldList(TextField())
+    images = FieldList(HiddenField())
     body = TextAreaField(validators=[required()])
     
     

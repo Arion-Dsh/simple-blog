@@ -263,8 +263,8 @@
         initialContent:'',
         autoClearinitialContent:false, //是否自动清除编辑器初始内容，注意：如果focus属性设置为true,这个也为真，那么编辑器一上来就会触发导致初始化的内容看不到了
         iframeCssUrl:'', //要引入css的url
-        removeFormatTags:'b,big,code,del,dfn,em,font,i,ins,kbd,q,samp,small,span,strike,strong,sub,sup,tt,u,var', //清除格式删除的标签
-        removeFormatAttributes:'class,style,lang,width,height,align,hspace,valign', //清除格式删除的属性
+        removeFormatTags:'', //清除格式删除的标签
+        removeFormatAttributes:'', //清除格式删除的属性
         enterTag:'p', //编辑器回车标签。p或br
         maxUndoCount:20, //最多可以回退的次数
         maxInputCount:20, //当输入的字符数超过该值时，保存一次现场

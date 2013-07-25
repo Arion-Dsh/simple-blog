@@ -1,4 +1,4 @@
-
+mongod
 <!doctype html>
 <html lang="zh_cn">
 <head>
@@ -27,11 +27,16 @@
 
 			%for post in posts._list:
             <div class="email-item pure-g">
+				%if post.images:
                 <div class="pure-u">
-                    <img class="email-avatar" alt="Reid Burke's avatar" src="/img/common/reid-avatar.png" height="64" width="64"/>
+					
+                    <img class="email-avatar"  src="/upload/${ post.images[0]}" height="64" width="64"/>
                 </div>
+				 <div class="pure-u-3-4">
+				%else:
+				 <div class="pure-u-1">
+				%endif
 
-                <div class="pure-u-3-4">
                     
                     <h4 class="email-subject">
 						<a href="${reverse_url('post',post.slug)}">${post.title}</a>

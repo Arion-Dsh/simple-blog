@@ -20,10 +20,22 @@ seajs.use(['$'], function($) {
 		$(this).parent().parent().parent().addClass("email-item-selected");
 
 	})
+});
+
+define(function(require, exports, module) {
+	var $ = require('$');
+	$(function(){                   //dom ready调用的另外一种方式
+		//加入代码高亮  
+	  	var code =$('.email-content-body code');
+	  	if (code) {
+			require.async('lib/rainbow/themes/blackboard.css');	
+			require.async('rainbow');			
+	  	}
+
+	        });
+ 
+ 
+
 	
-	$(".email-subject a").click(function(e){
-
-	});
-
-
+	
 });
