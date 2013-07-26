@@ -5,8 +5,8 @@ seajs.config({
   // 配置别名
   alias: {
     // 配置 jquery 的 shim 配置，这样我们就可以通过 require('jquery') 来获取 jQuery
-    '$': 'lib/jquery', 
-	'uploader': 'lib/upload',
-	'rainbow': 'lib/rainbow-custom.min'
+    '$': 'libs/jquery', 
+	'uploader': 'libs/upload',
+	'rainbow': 'libs/rainbow/rainbow-custom.min'
   }
 });
