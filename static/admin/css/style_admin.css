@@ -1,9 +1,6 @@
 body {
-<<<<<<< HEAD
-    /*font-family: "Lucida Grande", Helvetica, Arial, Verdana,sans-serif;*/
-=======
-    font-family: "Lucida Grande", /*"Lucida Sans Unicode",*/ Helvetica, Arial, Verdana, sans-serif;
->>>>>>> 7945220ad7db17bc2200b52599183782f10ee30c
+
+    font-family: Helvetica Neue, Microsoft Yahei,Hiragino Sans GB,WenQuanYi Micro Hei,sans-serif;
     color: #777;
 }
 .wrapper,
