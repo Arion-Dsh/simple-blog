@@ -14,4 +14,5 @@ mongotor(异步mongodb）
 部署在ubuntu上 使用tornado+ngnix.
 
 添加图片上传。
-页面代码高亮未实现。
+页面代码高亮。
+
