@@ -28,8 +28,8 @@ class Index(BaseHandler):
     def get(self, page=1):
         posts_found = yield gen.Task(Post.objects.find,{'active': True}, sort=({"_id": -1}))
         posts = Paginate(posts_found, page, 7)
-        node = yield gen.Task(Category.objects.find_one,{"name":"index"})
-        self.render('post/index.html', posts=posts, node=node)
+        categorydes = yield gen.Task(Category.objects.find_one,{"name":"index"})
+        self.render('post/list.html', posts=posts, categorydes=categorydes)
 
 class PostCategory(BaseHandler):
     
@@ -39,9 +39,9 @@ class PostCategory(BaseHandler):
     def get(self, slug, page=1):
         posts_found = yield gen.Task(Post.objects.find,{'active': True, 'category':slug}, sort=({"_id": -1}))
         posts = Paginate(posts_found, page, 7)
-        node = yield gen.Task(Category.objects.find_one, {'name':slug})
+        categorydes = yield gen.Task(Category.objects.find_one, {'name':slug})
         self.set_secure_cookie("paginate_page", unicode(page))
-        self.render('post/list.html', posts=posts, node=node)
+        self.render('post/list.html', posts=posts, categorydes=categorydes, category=slug)
 
 class Node(BaseHandler):
     
@@ -52,7 +52,7 @@ class Node(BaseHandler):
         node = yield gen.Task(Post.objects.find_one,{'slug':slug})
         post_list = yield gen.Task(Post.objects.find,{'active': True, 'category':node.category}, sort=({"_id": -1}))
         posts = Paginate(post_list, page, 7)       
-        self.render('post/email.html',node=node, posts=posts)
+        self.render('post/node.html',node=node, posts=posts)
         
             
         

@@ -1,27 +1,10 @@
 <%block name="nav">
-<div class="pure-u" id="nav">
-    <a href="#nav" class="nav-menu-button">Menu</a>
+<nav class="main-nav">
+	<a href="${reverse_url("index")}"><i class="icon-th"></i>Home</a>
+	<a href="${reverse_url("category", "Life")}"><i class="icon-cogs"></i>Life</a>
+	<a href="${reverse_url("category", "Work")}"><i class="icon-leaf"></i> Work</a>
+	<a href="${reverse_url("category", "Rabbit-Hole")}"><i class="icon-rocket"></i>Rabbit-Hole</a>
+	<a href="#"><i class="icon-heart"></i>About</a>
+</nav>
 
-    <div class="nav-inner">
-        
-		<div class="logo">
-			<a href="${reverse_url("index")}"> Arion's Life</a>
-		</div>
-
-        <div class="pure-menu pure-menu-open">
-            <ul>
-                <li><a href="${reverse_url("index")}">Home</a></li>
-                <li><a href="${reverse_url("category", "Life")}">Life</a></li>
-                <li><a href="${reverse_url("category", "Work")}">Work</a></li>
-                <li><a href="${reverse_url("category", "Rabbit-Hole")}">Rabbit Hole</a></li>
-                <!-- <li><a href="/">About Me</a></li> -->
-				
-                 <li class="pure-menu-heading">Labels</li>
-                <li><a href="#"><span class="email-label-personal"></span>github</a></li>
-                <!--<li><a href="#"><span class="email-label-work"></span>Work</a></li>
-                <li><a href="#"><span class="email-label-travel"></span>Travel</a></li> -->
-            </ul>
-        </div>
-    </div>
-</div>
 </%block>

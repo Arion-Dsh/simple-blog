@@ -29,7 +29,7 @@ class Application(tornado.web.Application):
         """docstring for __init__"""
         handlers = [
             tornado.web.URLSpec(r"/upload/", FileHandler),
-            tornado.web.URLSpec(r"/delete/", FileDel),
+            tornado.web.URLSpec(r"/delete、", FileDel),
             tornado.web.URLSpec(r"/logout", Logout, name="logout"),
             tornado.web.URLSpec(r"/admin/login", AdminLogin, name="admin_login"),
             tornado.web.URLSpec(r"/admin", Admin, name="admin_index"),            
