@@ -12,14 +12,14 @@
 		${category}-
 		%endif
 		 Arion's' Life</title>
-	<!--[if !(lte IE 8)]>-->	
+	<!--[if !(lte IE 8)]><!-->
 	<link rel="stylesheet" href="${static_url("base.css")}">
 	<link rel="stylesheet" href="${static_url("post/css/style.css")}"type="text/css"charset="utf-8">
 	<link rel="stylesheet" href="${static_url("font-awesome.min.css")}"type="text/css"charset="utf-8">
 	<!--<![endif]-->
 </head>
 <body>
-	<!--[if lte IE 8 ]><div id="notes-wrap">
+	<!--[if lt IE 9 ]><div id="notes-wrap">
 			<style type="text/css" media="screen">
 		#notes-wrap{
 			position:absolute;
@@ -52,14 +52,16 @@
 				）
 			</div>
 			<script type="text/javascript">
-			function removeNotes()
+			function removeNotes(_element)
 			  {
-			  var wrap=document.getElementById("notes-wrap");
-			  wrap.remove()
+			    var _parentElement = _element.parentNode;
+		         if(_parentElement){
+		                _parentElement.removeChild(_element);
+		         }
 			  }
 			</script>
 			<div class="notes-footer">
-				what? 你不知道什么是浏览器？ 你不想更换浏览器？ 好吧。 你可以进入本站的裸体模式。 <a href="#" onclick="removeNotes()">一键脱光！</a>
+				what? 你不知道什么是浏览器？ 你不想更换浏览器？ 好吧。 你可以进入本站的裸体模式。 <a href="#" onclick="removeNotes(this)">一键脱光！</a>
 			</div>
 		</div>
 	</div>
