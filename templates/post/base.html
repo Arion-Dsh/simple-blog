@@ -40,7 +40,7 @@
 			font-size:1.8em;
 		}
 		</style>
-		<div class="notes typo">
+		<div class="notes typo" id="notes">
 			<div class="notes-title">
 				OOPS!你的浏览器版本过低!
 			</div>
@@ -52,8 +52,9 @@
 				）
 			</div>
 			<script type="text/javascript">
-			function removeNotes(_element)
+			function removeNotes()
 			  {
+			  	var _element=document.getElementById('notes')
 			    var _parentElement = _element.parentNode;
 		         if(_parentElement){
 		                _parentElement.removeChild(_element);
@@ -61,7 +62,7 @@
 			  }
 			</script>
 			<div class="notes-footer">
-				what? 你不知道什么是浏览器？ 你不想更换浏览器？ 好吧。 你可以进入本站的裸体模式。 <a href="#" onclick="removeNotes(this)">一键脱光！</a>
+				what? 你不知道什么是浏览器？ 你不想更换浏览器？ 好吧。 你可以进入本站的裸体模式。 <a href="#" onclick="removeNotes()">一键脱光！</a>
 			</div>
 		</div>
 	</div>
