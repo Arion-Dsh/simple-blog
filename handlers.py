@@ -28,8 +28,7 @@ class Index(BaseHandler):
     def get(self, page=1):
         posts_found = yield gen.Task(Post.objects.find,{'active': True}, sort=({"_id": -1}))
         posts = Paginate(posts_found, page, 7)
-        categorydes = yield gen.Task(Category.objects.find_one,{"name":"index"})
-        self.render('post/list.html', posts=posts, categorydes=categorydes)
+        self.render('post/list.html', posts=posts)
 
 class PostCategory(BaseHandler):
     
@@ -48,11 +47,9 @@ class Node(BaseHandler):
         
     @tornado.web.asynchronous    
     @gen.engine     
-    def get(self, slug, page=1):
-        node = yield gen.Task(Post.objects.find_one,{'slug':slug})
-        post_list = yield gen.Task(Post.objects.find,{'active': True, 'category':node.category}, sort=({"_id": -1}))
-        posts = Paginate(post_list, page, 7)       
-        self.render('post/node.html',node=node, posts=posts)
+    def get(self, slug):
+        node = yield gen.Task(Post.objects.find_one,{'slug':slug}) 
+        self.render('post/node.html',node=node)
         
             
         
@@ -108,6 +105,9 @@ class PostAdd(BaseHandler):
     @gen.engine
     def get(self):
         form = PostForm()
+        category_list = yield gen.Task(Category.objects.find,{})
+        for category in category_list:
+            form.category.choices.append((category.alias,category.alias))
         self.render('admin/post_add.html', form=form)
     
     @tornado.web.authenticated    
@@ -116,6 +116,7 @@ class PostAdd(BaseHandler):
     def post(self):
         post =Post()
         form = PostForm(self.request.arguments)
+
         slug = form.title.data.strip(' ').replace(' ', '-')
         _post = yield gen.Task(Post.objects.find_one,{'slug':slug}) 
         if form.validate():
