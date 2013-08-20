@@ -28,8 +28,7 @@ class Index(BaseHandler):
     def get(self, page=1):
         posts_found = yield gen.Task(Post.objects.find,{'active': True}, sort=({"_id": -1}))
         posts = Paginate(posts_found, page, 7)
-        categorydes = yield gen.Task(Category.objects.find_one,{"name":"index"})
-        self.render('post/list.html', posts=posts, categorydes=categorydes)
+        self.render('post/list.html', posts=posts)
 
 class PostCategory(BaseHandler):
     
@@ -48,11 +47,9 @@ class Node(BaseHandler):
         
     @tornado.web.asynchronous    
     @gen.engine     
-    def get(self, slug, page=1):
-        node = yield gen.Task(Post.objects.find_one,{'slug':slug})
-        post_list = yield gen.Task(Post.objects.find,{'active': True, 'category':node.category}, sort=({"_id": -1}))
-        posts = Paginate(post_list, page, 7)       
-        self.render('post/node.html',node=node, posts=posts)
+    def get(self, slug):
+        node = yield gen.Task(Post.objects.find_one,{'slug':slug}) 
+        self.render('post/node.html',node=node)
         
             
         
@@ -108,6 +105,17 @@ class PostAdd(BaseHandler):
     @gen.engine
     def get(self):
         form = PostForm()
+<<<<<<< HEAD
+        category_choices =[]
+        category_list = yield gen.Task(Category.objects.find,{})
+        for category in category_list:
+            category_choices.append((category.name,category.name))
+        form.category.choices = category_choices
+=======
+        category_list = yield gen.Task(Category.objects.find,{})
+        for category in category_list:
+            form.category.choices.append((category.alias,category.alias))
+>>>>>>> 92665fb89ea043bff556d7f853194210ff1024ef
         self.render('admin/post_add.html', form=form)
     
     @tornado.web.authenticated    
@@ -116,6 +124,15 @@ class PostAdd(BaseHandler):
     def post(self):
         post =Post()
         form = PostForm(self.request.arguments)
+<<<<<<< HEAD
+        category_choices =[]
+        category_list = yield gen.Task(Category.objects.find,{})
+        for category in category_list:
+            category_choices.append((category.name,category.name))
+        form.category.choices = category_choices
+=======
+
+>>>>>>> 92665fb89ea043bff556d7f853194210ff1024ef
         slug = form.title.data.strip(' ').replace(' ', '-')
         _post = yield gen.Task(Post.objects.find_one,{'slug':slug}) 
         if form.validate():
@@ -151,6 +168,11 @@ class PostEdit(BaseHandler):
     def get(self,slug):
         post = yield gen.Task(Post.objects.find_one,{'slug':slug})
         form = PostForm(obj=post)
+        category_choices =[]
+        category_list = yield gen.Task(Category.objects.find,{})
+        for category in category_list:
+            category_choices.append((category.name,category.name))
+        form.category.choices = category_choices
         self.render('admin/post_add.html', form=form)
     
     @tornado.web.authenticated
@@ -159,9 +181,14 @@ class PostEdit(BaseHandler):
     def post(self, slug):
         post = yield gen.Task(Post.objects.find_one,{'slug':slug})
         form = PostForm(self.request.arguments)
+        category_choices =[]
+        category_list = yield gen.Task(Category.objects.find,{})
+        for category in category_list:
+            category_choices.append((category.name,category.name))
+        form.category.choices = category_choices
         if form.validate():
             form.populate_obj(post)
-        
+            
             yield gen.Task(post.update)
             self.flash("success", 'success')
             self.redirect(self.reverse_url("post_edit", slug))

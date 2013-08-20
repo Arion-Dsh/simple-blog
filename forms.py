@@ -10,13 +10,8 @@ from core.field import TagListField
 from wtforms.validators import ValidationError, email, required
 
 
-from settings import ADMIN_NAME, ADMIN_PASSWORD, CATEGORIES
+from settings import ADMIN_NAME, ADMIN_PASSWORD
 
-def category_choices():
-    category_choices =[]
-    for category in CATEGORIES:
-        category_choices.append((category, category))
-    return category_choices  
 
 
 class LoginForm(Form):
@@ -41,7 +36,7 @@ class CategoryForm(Form):
 
 class PostForm(Form):
     title = TextField(validators=[required()])
-    category = SelectField(choices= category_choices())
+    category = SelectField(choices=[])
     tags = TagListField()    
     active = SelectField(choices=[('True', 'Ture'), ('False', 'False')])
     description = TextAreaField(validators=[required()])

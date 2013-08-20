@@ -99,6 +99,9 @@ a:hover{
 	margin-bottom:20px;
 	padding: 20px;
 }
+pre{
+	padding:0 20px;
+}
 .paginator{
 	margin-bottom:20px;
 	text-align:center;

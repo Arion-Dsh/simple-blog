@@ -13,7 +13,7 @@ import tornado.httpserver
 from tornado.options import define, options
 from core.tomako import MakoTemplateLoader
 
-define("port", default=8000, help="run on the given port", type=int)
+define("port", default=8000, type=int)
 Database.connect('localhost:27017', 'Arion-blog-db')
 
 from handlers import (AdminLogin, Logout, Admin, CategoryAdd, CategoryList, CategoryEdit,
@@ -29,7 +29,7 @@ class Application(tornado.web.Application):
         """docstring for __init__"""
         handlers = [
             tornado.web.URLSpec(r"/upload/", FileHandler),
-            tornado.web.URLSpec(r"/delete、", FileDel),
+            tornado.web.URLSpec(r"/delete/", FileDel),
             tornado.web.URLSpec(r"/logout", Logout, name="logout"),
             tornado.web.URLSpec(r"/admin/login", AdminLogin, name="admin_login"),
             tornado.web.URLSpec(r"/admin", Admin, name="admin_index"),            
