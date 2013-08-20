@@ -106,11 +106,17 @@ class PostAdd(BaseHandler):
     def get(self):
         form = PostForm()
 <<<<<<< HEAD
+<<<<<<< HEAD
         category_choices =[]
         category_list = yield gen.Task(Category.objects.find,{})
         for category in category_list:
             category_choices.append((category.name,category.name))
         form.category.choices = category_choices
+=======
+        category_list = yield gen.Task(Category.objects.find,{})
+        for category in category_list:
+            form.category.choices.append((category.alias,category.alias))
+>>>>>>> 92665fb89ea043bff556d7f853194210ff1024ef
 =======
         category_list = yield gen.Task(Category.objects.find,{})
         for category in category_list:
@@ -125,11 +131,15 @@ class PostAdd(BaseHandler):
         post =Post()
         form = PostForm(self.request.arguments)
 <<<<<<< HEAD
+<<<<<<< HEAD
         category_choices =[]
         category_list = yield gen.Task(Category.objects.find,{})
         for category in category_list:
             category_choices.append((category.name,category.name))
         form.category.choices = category_choices
+=======
+
+>>>>>>> 92665fb89ea043bff556d7f853194210ff1024ef
 =======
 
 >>>>>>> 92665fb89ea043bff556d7f853194210ff1024ef
