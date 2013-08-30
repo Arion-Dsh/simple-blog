@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin python
 # -*- coding: utf-8 -*-
-# author :Arion
+# author: Arion
 
 
 import os, datetime, math
@@ -28,7 +28,7 @@ class Index(BaseHandler):
     def get(self, page=1):
         posts_found = yield gen.Task(Post.objects.find,{'active': True}, sort=({"_id": -1}))
         posts = Paginate(posts_found, page, 7)
-        self.render('post/list.html', posts=posts)
+        self.render('post/index.html', posts=posts)
 
 class PostCategory(BaseHandler):
     
@@ -38,9 +38,7 @@ class PostCategory(BaseHandler):
     def get(self, slug, page=1):
         posts_found = yield gen.Task(Post.objects.find,{'active': True, 'category':slug}, sort=({"_id": -1}))
         posts = Paginate(posts_found, page, 7)
-        categorydes = yield gen.Task(Category.objects.find_one, {'name':slug})
-        self.set_secure_cookie("paginate_page", unicode(page))
-        self.render('post/list.html', posts=posts, categorydes=categorydes, category=slug)
+        self.render('post/category.html', posts=posts)
 
 class Node(BaseHandler):
     
@@ -105,23 +103,11 @@ class PostAdd(BaseHandler):
     @gen.engine
     def get(self):
         form = PostForm()
-<<<<<<< HEAD
-<<<<<<< HEAD
         category_choices =[]
         category_list = yield gen.Task(Category.objects.find,{})
         for category in category_list:
             category_choices.append((category.name,category.name))
         form.category.choices = category_choices
-=======
-        category_list = yield gen.Task(Category.objects.find,{})
-        for category in category_list:
-            form.category.choices.append((category.alias,category.alias))
->>>>>>> 92665fb89ea043bff556d7f853194210ff1024ef
-=======
-        category_list = yield gen.Task(Category.objects.find,{})
-        for category in category_list:
-            form.category.choices.append((category.alias,category.alias))
->>>>>>> 92665fb89ea043bff556d7f853194210ff1024ef
         self.render('admin/post_add.html', form=form)
     
     @tornado.web.authenticated    
@@ -130,19 +116,11 @@ class PostAdd(BaseHandler):
     def post(self):
         post =Post()
         form = PostForm(self.request.arguments)
-<<<<<<< HEAD
-<<<<<<< HEAD
         category_choices =[]
         category_list = yield gen.Task(Category.objects.find,{})
         for category in category_list:
             category_choices.append((category.name,category.name))
         form.category.choices = category_choices
-=======
-
->>>>>>> 92665fb89ea043bff556d7f853194210ff1024ef
-=======
-
->>>>>>> 92665fb89ea043bff556d7f853194210ff1024ef
         slug = form.title.data.strip(' ').replace(' ', '-')
         _post = yield gen.Task(Post.objects.find_one,{'slug':slug}) 
         if form.validate():
@@ -273,7 +251,7 @@ class FileHandler(tornado.web.RequestHandler):
         filename = f.get('filename', '')
         fullpath = UPLOAD_PATH+"/"+filename
         rpath = '/' + UPLOAD_DIR + '/' + filename
-        b = open(fullpath, 'w')
+        b = open(fullpath, 'w+')
         b.write(f.get('body', ''))
         b.close
         self.write(filename)

@@ -13,7 +13,7 @@
 	%for post in posts:
 	<div class="pure-g post-items l-lbox">
 		<div class="pure-u-1-2">
-			<a href="${reverse_url('post_edit', post.name)}">${post.name}</a>
+			<a href="${reverse_url('category_edit', post.name)}">${post.name}</a>
 		</div>
 		<div class="pure-u-1-2">
 			<a href="${reverse_url('category_edit', post.name)}">编辑</a>

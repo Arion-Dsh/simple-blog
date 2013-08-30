@@ -7,7 +7,7 @@ from mongotor.orm.collection import Collection as Model
 from mongotor.orm.field import *
 
 class User(Model):
-    """User Model"""  
+
     __collection__ = "user"
     _id = ObjectIdField()
     name = StringField()
@@ -25,7 +25,7 @@ class Tag(Model):
     slug = StringField()
 
 class Category(Model):
-    """Category Model"""    
+    """Tag Model"""    
     __collection__ = "category"
     _id = ObjectIdField()
     name = StringField()
@@ -34,7 +34,7 @@ class Category(Model):
     description = StringField()
 
 class Comment(Model):
-    """Comment  Model"""
+    """Tag  Model"""
     __collection__ = "comment"
     _id = ObjectIdField()
     created_at =  DateTimeField()
@@ -42,22 +42,24 @@ class Comment(Model):
     name = StringField()
     email = StringField()
     body = StringField()
-
+        
 class Post(Model):
     """ Posts Model"""
     __collection__ = "post"
     _id = ObjectIdField()
     #_type = StringField()
     created_at = DateTimeField()
+    comment_change = DateTimeField()
     active = BooleanField()
     slug = StringField()
     title = StringField()
+    slug = StringField()
     category = StringField()
     tags = ListField()
     description = StringField()
     body = StringField()
     images = ListField()
-    #comments = ListField()
+    comments = ListField()
     
 
     

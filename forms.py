@@ -36,9 +36,9 @@ class CategoryForm(Form):
 
 class PostForm(Form):
     title = TextField(validators=[required()])
-    category = SelectField(choices=[])
+    category = SelectField(choices= [])
     tags = TagListField()    
-    active = SelectField(choices=[('True', 'Ture'), ('False', 'False')])
+    active = BooleanField()
     description = TextAreaField(validators=[required()])
     images = FieldList(HiddenField())
     body = TextAreaField(validators=[required()])

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # author :Arion
 
@@ -13,7 +13,7 @@ import tornado.httpserver
 from tornado.options import define, options
 from core.tomako import MakoTemplateLoader
 
-define("port", default=8000, type=int)
+define("port", default=8000, help="run on the given port", type=int)
 Database.connect('localhost:27017', 'Arion-blog-db')
 
 from handlers import (AdminLogin, Logout, Admin, CategoryAdd, CategoryList, CategoryEdit,
@@ -40,11 +40,11 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r"/admin/post/add", PostAdd, name="post_add"),
             tornado.web.URLSpec(r"/admin/post/edit/(.*)", PostEdit, name="post_edit"),
             tornado.web.URLSpec(r"/admin/post/del/(.*)", PostDel, name="post_del"),
-            tornado.web.URLSpec(r"/post/(.*)", Node, name="post"),
+            tornado.web.URLSpec(r"/post/(.*).html", Node, name="post"),
             tornado.web.URLSpec(r"/", Index, name = "index"),
             tornado.web.URLSpec(r"/pages/([0-9]+)/", Index, name="page_list"),
             tornado.web.URLSpec(r"/(.*)/index.html", PostCategory, name="category"),
-            tornado.web.URLSpec(r"/(.*)/([0-9]+)", PostCategory ,name="category_list"),
+            tornado.web.URLSpec(r"/(?P<slug>[^\/]+)/(?P<page>[^\/]+)", PostCategory ,name="category_list"),
             (r"/src/(.*)", tornado.web.StaticFileHandler, {'path': 'static/src/'}),
             (r'/upload/(.*)', tornado.web.StaticFileHandler, {'path': 'upload/'})
             
@@ -53,8 +53,8 @@ class Application(tornado.web.Application):
             'template_loader': MakoTemplateLoader(os.path.join(os.path.dirname(__file__), "templates")),
             'static_path': os.path.join(os.path.dirname(__file__), "static"),
             'login_url': "/admin/login",
-            'debug':True,
-            "cookie_secret": "bZJc2sWbQLKos6GkHn/VB9oXwQt8S0R0kRvJ5/xJ89E=",
+            #'debug':True,
+            "cookie_secret": "EBYetpZJRESoL6ROThwUpNwLI91+109fpujnqVl/njM=",
             # "xsrf_cookies": True,
             'gzip': True,
             

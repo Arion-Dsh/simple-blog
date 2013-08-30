@@ -10,7 +10,7 @@ seajs.use(['$', 'uploader'], function($, Uploader) {
         trigger: '#upload-0',
         accept: 'image/*',
         action: '/upload/',
-        data: {'_xsrf': xsrf}
+        //data: {'_xsrf': xsrf}
     }).success(function(data) {
        	//alert(data);
         var image = '<img src="/upload/'+data+'"  rola="'+data+'">'

@@ -6,11 +6,10 @@ import os, sys
 
 
 # amdin 用户名 必须为 email
-ADMIN_NAME = "EinMagic@gmail.com"
+ADMIN_NAME = "email@gmail.com"
 ADMIN_PASSWORD = "1234"
 
-#category
-CATEGORIES = ["Life","Work","Rabbit-Hole"]
+
 
 
 DEBUG = True

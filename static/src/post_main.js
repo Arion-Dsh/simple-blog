@@ -5,7 +5,7 @@ define(function(require, exports, module) {
 	$(function(){                   //dom ready调用的另外一种方式
 	  	var code =$('.artcle-cont code');
 	  	if (code) {
-			require.async('libs/rainbow/themes/baby-blue.css');
+			require.async('libs/rainbow/themes/github.css');
 			seajs.use(['rainbow'],function(Rainbow){
 			Rainbow.color();
 			})
