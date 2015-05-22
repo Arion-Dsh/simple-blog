@@ -206,7 +206,6 @@ ul {
     margin-top: 16px;
     padding: 16px 16px;
     font-size:16px;
-    text-align: center;
 }
 #main-cont .chapters-header {
     margin-top:16px;
@@ -287,9 +286,6 @@ ul {
 }
 #main-cont .article-content h2{
     margin: 0.618em 0 0.382em;
-}
-#main-cont .novel-des {
-    text-align: left;
 }
 #footer {
     padding-left:16px;
