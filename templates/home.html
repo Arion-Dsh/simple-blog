@@ -10,7 +10,7 @@
     {% end %}
     {% if image%}
     <div class="home-img">
-        <img src="{{image.url}}" alt="{{image.description}}" class="pure-img"/>
+        <img src="{{image.url or '#'}}" alt="{{image.description}}" class="pure-img"/>
     </div>
     {% end %}
     <div class="main-block">

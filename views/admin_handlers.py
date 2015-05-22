@@ -23,7 +23,7 @@ class AuthLoginHandler(BaseHandler):
             self.flash('validationError.', 'Error')
             return
         query = User.objects
-        user = query.get(email=email)
+        user = query(email=email).first()
         # 如果没有用户添加进去
         if not user and query.count() == 0:
             user = User(
@@ -32,6 +32,7 @@ class AuthLoginHandler(BaseHandler):
                 pass_word=pass_word
             )
             user.save()
+            
         if user.pass_word != pass_word:
             self.flash('password is wrong!', 'Error')
             return
