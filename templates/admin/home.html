@@ -1,0 +1,42 @@
+{% extends "base.html"%}
+
+{%block name="main_body" %}
+<div class="pure-u-3-4 main-content">
+        <form method="post" class="pure-form pure-form-stacked">
+            {% module xsrf_form_html() %}
+            <legend>Add Quote</legend>
+            <div class=" pure-g add-quote">
+                <div class="pure-u-3-5">
+                    <input type="text" name="quote_body" placeholder="引用" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-1-5">
+                    <input type="text" name="quote_author" placeholder="出处" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-1-5">
+                    <button type="submit" class="pure-button pure-button-primary" > 确定</button>
+                </div>
+            </div>
+        </form>
+     <h3 class="items-title">Articles</h3>
+    {%for article in articles %}
+	<div class="pure-g items">
+		<div class="pure-u-1-6">
+			{{article.creat_time.strftime('%H:%M %m-%d')}}
+		</div>
+		<div class="pure-u-7-12">
+			<a href="{{reverse_url('admin_article_edit', article.id_no)}}">{{article.title}}</a>
+		</div>
+		<div class="pure-u-1-6">
+		    {{article.category}}
+		</div>
+		<div class="pure-u-1-12">
+        	{% if article.active is 1 %}
+			<i class="fa fa-check"></i>
+			{% else %}
+			<i class="fa fa-close"></i>
+			{% end %}
+		</div>
+	</div>
+	{% end %}
+</div>
+{% end %}

@@ -1,0 +1,40 @@
+{% extends "base.html"%}
+
+{%block name="main_body" %}
+<div class="pure-u-3-4 main-content">
+        <form method="post" class="pure-form pure-form-stacked">
+            {% module xsrf_form_html() %}
+            <legend>Add Category</legend>
+            <div class=" pure-g add-category">
+                <div class="pure-u-1-5">
+                    <input type="text" name="name" placeholder="分类" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-3-5">
+                    <input type="text" name="description" placeholder="描述" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-1-5">
+                    <button type="submit" class="pure-button pure-button-primary" > 确定</button>
+                </div>
+            </div>
+        </form>
+      <div class="pure-g items">
+          <h3 class="pure-u-1 items-title">Categories</h3>
+          {% for category in categories%}
+          <div class='pure-u-1-5'>
+              {{category.name}}
+          </div>
+          <div class="pure-u-3-5">
+              {{category.description}}
+          </div>
+          <div class="pure-u-1-5">
+          <a class="pure-button button-error button-xsmall art-del" url-bind="{{reverse_url('admin_category', category.id_no)}}">
+                <i class="fa fa-trash-o"></i>delete
+          </a>
+          <a class="pure-button button-secondary button-xsmall" href="{{reverse_url('admin_category', category.id_no)}}">
+            <i class="fa fa-wrench"></i>edit
+          </a>
+          </div>
+          {% end %}
+      </div>
+</div>
+{% end %}

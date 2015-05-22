@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+
+{%block name="main_body" %}
+<div class="pure-u-3-4 main-content" >
+        <div class="l-box">
+            <h3>Category Edit</h3>
+            <form method="post" class="pure-form pure-form-stacked">
+            {% module xsrf_form_html() %}
+            <legend>Category Edit</legend>
+            <div class=" pure-g add-category">
+                <div class="pure-u-1-5">
+                    <input type="text" name="name" value={{category.name}} placeholder="分类" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-3-5">
+                    <input type="text" name="description" value={{category.description}} placeholder="描述" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-1-5">
+                    <button type="submit" class="pure-button pure-button-primary" > 确定</button>
+                </div>
+            </div>
+        </form>
+        </div>
+        
+</div>
+{% end %}

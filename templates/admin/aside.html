@@ -1,12 +1,15 @@
 			<div class="pure-u-1-4 aside">
 				<div class="l-rbox">
-					<div class="pure-menu pure-menu-open">
-						 <ul>
-							<li class="pure-menu-heading">文章</li>
-					        <li><a href="${reverse_url('post_add')}">添加文章</a></li>
-					        <li><a href="${reverse_url('admin_index')}">管理文章</a></li>
-					        <li class="pure-menu-heading">分类</li>
-					        <li><a href="${reverse_url('admin_category_list')}">分类管理</a></li>
+					<div class="pure-menu">
+						 <ul class="pure-menu-list">
+                            <li class="pure-menu-heading">hi ya.</li>
+							<li class="pure-menu-item"><a href="{{reverse_url('admin_home')}}" class="pure-menu-link">Home</a></li>
+					        <li class="pure-menu-item"><a href="{{reverse_url('admin_articles', 1)}}" class="pure-menu-link">Article</a></li>
+					        <li class="pure-menu-item"><a href="{{reverse_url('admin_novels', 1)}}" class="pure-menu-link">Novel</a></li>
+                            <li class="pure-menu-item"><a href="{{reverse_url('admin_novel_chapters', 1)}}" class="pure-menu-link">Chapters</a></li>
+                            <li class="pure-menu-item"><a href="{{reverse_url('admin_sigle_pages', 1)}}" class="pure-menu-link">Page</a></li>
+					        <li class="pure-menu-item"><a href="{{reverse_url('admin_quotes', 1)}}" class="pure-menu-link">Quote</a></li>
+					        <li class="pure-menu-item"><a href="{{reverse_url('admin_categories')}}" class="pure-menu-link">Category</a></li>
 					    </ul>
 					</div>
 				</div>

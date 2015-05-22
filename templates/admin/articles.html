@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{%block name="main_body" %}
+<div class="pure-u-3-4 main-content" >
+         <div class=" pure-g items-header">
+	    
+	        <h4  class="pure-u-5-6 items-title">Article</h4>
+	        <div class="pure-u-1-6 header-plus">
+	            <a href="{{reverse_url('admin_article_add')}}" class="pure-button button-success button-small">add</a>
+	        </div>
+	    </div>
+	    
+	<div class="pure-g items">
+		<div class="pure-u-1-6">
+			时间
+		</div>
+		<div class="pure-u-3-8">
+			标题
+		</div>
+		<div class="pure-u-1-6">
+		    分类
+		</div>
+		<div class="pure-u-1-12">
+			active
+		</div>
+		<div class="pure-u-5-24">
+			操作
+		</div>
+	</div>
+	{%for article in articles._list %}
+	<div class="pure-g items">
+		<div class="pure-u-1-6">
+			{{article.creat_time.strftime('%H:%M %m-%d')}}
+		</div>
+		<div class="pure-u-3-8">
+			<a href="{{reverse_url('admin_article_edit', article.id_no)}}">{{article.title}}</a>
+		</div>
+		<div class="pure-u-1-6">
+		    {{article.category.name}}
+		</div>
+		<div class="pure-u-1-12">
+        	{% if article.active is 1 %}
+			<i class="fa fa-check"></i>
+			{% else %}
+			<i class="fa fa-close"></i>
+			{% end %}
+		</div>
+		<div class="pure-u-5-24">
+		        <a class="pure-button button-error button-xsmall art-del" url-bind="{{reverse_url('admin_article_del', article.id_no)}}">
+		            <i class="fa fa-trash"></i>delete
+		        </a>
+			<a class="pure-button button-secondary button-xsmall" href="{{reverse_url('admin_article_edit', article.id_no)}}">
+			    <i class="fa fa-wrench"></i>edit
+			</a>
+		</div>
+	</div>
+	{% end %}
+	
+	<div class="pure-g articles-footer">
+		{%if articles.pages != 1 %}
+		<div class="pure-u-1">
+			<ul class="pure-paginator">
+				{%if articles.has_prev %}
+			    <li>
+					<a class="pure-button prev" href="{{reverse_url('admin_articles', articles.prev_num)}}">&#171;</a>
+				</li>
+				{% end %}
+				{% for page in articles.iter_pages( left_edge=0, left_current=0,right_current=1, right_edge=0) %}
+					{%if page %}
+						{%if page != articles.page %}
+			    		<li><a class="pure-button" href="{{reverse_url('admin_articles', page)}}">{{page}}</a></li>
+						{%else%}
+			    		<li><a class="pure-button pure-button-active" href="{{reverse_url('admin_articles', page)}}">{{page}}</a></li>
+						{%end%}
+					{%end%}
+				{% end %}
+				{%if articles.has_next %}
+			    <li><a class="pure-button next" href="{{reverse_url('admin_articles', articles.next_num)}}">&#187;</a></li>
+				{% end %}
+			</ul>
+		</div>
+		{%end%}
+	</div>
+</div>
+{% end %}

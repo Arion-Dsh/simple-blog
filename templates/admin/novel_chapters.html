@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{%block name="main_body" %}
+<div class="pure-u-3-4 main-content">
+     <div class=" pure-g items-header">
+	        <h3  class="pure-u-5-6 items-title">Novel Chapters</h3>
+	        <div class="pure-u-1-6 header-plus">
+	            <a href="{{reverse_url('admin_novel_chapter_sigle')}}" class="pure-button button-success">add</a>
+	        </div>
+	  </div>
+	<div class="pure-g items">
+	    
+		<div class="pure-u-1-6">
+			creat_time
+		</div>
+		<div class="pure-u-3-8">
+			title
+		</div>
+		<div class="pure-u-1-6">
+		    novel name
+		</div>
+		<div class="pure-u-1-12">
+			active
+		</div>
+		<div class="pure-u-5-24">
+			settings
+		</div>
+	</div>
+	{%for chapter in novel_chapters._list %}
+	<div class="pure-g items">
+		<div class="pure-u-1-6">
+			{{chapter.creat_time.strftime('%H:%M %m-%d')}}
+		</div>
+		<div class="pure-u-3-8">
+			<a href="{{reverse_url('admin_novel_chapter', chapter.id_no)}}">{{chapter.title}}</a>
+		</div>
+		<div class="pure-u-1-6">
+		    {{chapter.novel.name}}
+		</div>
+		<div class="pure-u-1-12">
+        	{% if chapter.active is 1 %}
+			<i class="fa fa-check"></i>
+			{% else %}
+			<i class="fa fa-close"></i>
+			{% end %}
+		</div>
+		<div class="pure-u-5-24">
+			<a class="pure-button button-secondary button-xsmall" href="{{reverse_url('admin_novel_chapter', chapter.id_no)}}">
+			    <i class="fa fa-wrench"></i>edit
+			</a>
+		</div>
+	</div>
+	{% end %}
+	
+	<div class="pure-g items-footer">
+		{%if novel_chapters.pages != 1 %}
+		<div class="pure-u-1">
+			<ul class="pure-paginator">
+				{%if novel_chapters.has_prev %}
+			    <li>
+					<a class="pure-button prev" href="{{reverse_url('admin_novel_chapters', novel_chapters.prev_num)}}">&#171;</a>
+				</li>
+				{% end %}
+				{% for page in novel_chapters.iter_pages( left_edge=0, left_current=0,right_current=1, right_edge=0) %}
+					{%if page %}
+						{%if page != novel_chapters.page %}
+			    		<li><a class="pure-button" href="{{reverse_url('admin_novel_chapters', page)}}">{{page}}</a></li>
+						{%else%}
+			    		<li><a class="pure-button pure-button-active" href="{{reverse_url('admin_novel_chapters', page)}}">{{page}}</a></li>
+						{%end%}
+					{%end%}
+				{% end %}
+				{%if novel_chapters.has_next %}
+			    <li><a class="pure-button next" href="{{reverse_url('admin_novel_chapters', novel_chapters.next_num)}}">&#187;</a></li>
+				{% end %}
+			</ul>
+		</div>
+		{%end%}
+	</div>
+</div>
+{% end %}

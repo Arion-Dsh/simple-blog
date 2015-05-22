@@ -1,0 +1,28 @@
+{% extends "base.html"%}
+
+{%block name="main_body"%}
+<div class="pure-u-1 pos-r">
+    <div class="quote-block pos-a">
+        <p class="quote-body">{{quote.body}}</p>
+        <p class="quote-author">——{{quote.author}}</p>
+    </div>
+    <div class="home-img">
+        <img src="{{image.url}}" alt="{{image.description}}" class="pure-img"/>
+    </div>
+    <div class="main-block">
+        <div class="home-items">
+         <h2>最新文章</h2>
+        <ul>
+            {% for article in articles%}
+            <li><i>{{article.creat_time.strftime('%d-%M')}}</i> <a href="{{reverse_url('article', 'zh-hans', article.creat_time.strftime('%d-%M'), article.id_no)}}">{{article.title}}</a> </li>
+            {%end%}
+        </ul>
+    </div>
+    <div class="article-content">
+        {% if page%}
+        {% raw page.html_content %}
+        {%end%}
+    </div>
+    </div>
+</div>
+{%end%}

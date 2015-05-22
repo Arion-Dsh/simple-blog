@@ -1,0 +1,62 @@
+{% extends "base.html"%}
+
+{%block name="main_body" %}
+<div class="pure-u-3-4 main-content">
+        <form method="post" class="pure-form pure-form-stacked">
+            {% module xsrf_form_html() %}
+            <legend>Add Novel</legend>
+            <div class=" pure-g add-category">
+                <div class="pure-u-1-5">
+                    <input type="text" name="name" placeholder="name" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-3-5">
+                    <input type="text" name="description" placeholder="description" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-1-5">
+                    <button type="submit" class="pure-button pure-button-primary" > 确定</button>
+                </div>
+            </div>
+        </form>
+      <div class="pure-g items categories">
+          <h3 class="pure-u-1 items-title">novels</h3>
+          {% for novel in novels._list%}
+          <div class='pure-u-1-5'>
+              {{novel.name}}
+          </div>
+          <div class="pure-u-3-5">
+              {{novel.description}}
+          </div>
+          <div class="pure-u-1-5">
+          <a class="pure-button button-secondary button-xsmall" href="{{reverse_url('admin_novel', novel.id_no)}}">
+            <i class="fa fa-wrench"></i>edit
+          </a>
+          </div>
+          {% end %}
+      </div>
+      <div class="pure-g items-footer">
+		{%if novels.pages != 1 %}
+		<div class="pure-u-1">
+			<ul class="pure-paginator">
+				{%if novels.has_prev %}
+			    <li>
+					<a class="pure-button prev" href="{{reverse_url('admin_novels', novels.prev_num)}}">&#171;</a>
+				</li>
+				{% end %}
+				{% for page in novels.iter_pages( left_edge=0, left_current=0,right_current=1, right_edge=0) %}
+					{%if page %}
+						{%if page != novels.page %}
+			    		<li><a class="pure-button" href="{{reverse_url('admin_novels', page)}}">{{page}}</a></li>
+						{%else%}
+			    		<li><a class="pure-button pure-button-active" href="{{reverse_url('admin_novels', page)}}">{{page}}</a></li>
+						{%end%}
+					{%end%}
+				{% end %}
+				{%if novels.has_next %}
+			    <li><a class="pure-button next" href="{{reverse_url('admin_novels', novels.next_num)}}">&#187;</a></li>
+				{% end %}
+			</ul>
+		</div>
+		{%end%}
+	</div>
+</div>
+{% end %}

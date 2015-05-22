@@ -1,19 +1,22 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
+<html>
 <head>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<title>arion's'</title>
-	<link rel="stylesheet" href="${static_url("pure-min.css")}" type="text/css"charset="utf-8">
-	<link rel="stylesheet" href="${static_url("admin/css/style_admin.css")}" type="text/css"charset="utf-8">	
-	<link rel="stylesheet" href="${static_url("font-awesome.min.css")}"type="text/css"charset="utf-8">
-	
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>arion's blog admin</title>
+    <link rel="stylesheet" href="{{static_url('pure-min.css')}}">
+    <link rel="stylesheet" href="{{static_url('font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{static_url('admin/style_admin.css')}}">
+    <script src="{{static_url('lib/zepto.min.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{static_url('admin/style_admin.js')}}" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 	<div class="wrapper">
-		<%include file="header.html"/> 
-		<div class="pure-g-r" id="content">
-			<%include file="aside.html"/>
-			<%block name="mian_body"/>			
-		</div>
-		<%include file="footer.html"/> 
+		{%include "header.html" %}
+		<div class="pure-g" id="content">
+            {%include "aside.html" %}
+			{%block name="main_body"%}{% end%}
+        </div>
+		{%include "footer.html" %}
 	</div>
 </body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "base.html"%}
+{% block name="title"%}{{chapter.title}} - {%end%}
+{%block name="main_body"%}
+<div class="pure-u-g">
+    <div class="pure-u-1">
+        <div class="main-block pos-r">
+            <div class="quote-block pos-a">
+            <p class="quote-body">{{quote.body}}</p>
+            {% if quote.author %}<p class="quote-author">—— {{quote.author}}</p>{% end %}
+        </div>
+        <div class="article-header">
+            <h1>{{chapter.title}}</h1>
+        </div>
+        <div class="article-content">
+            {% raw chapter.html_content %}
+        </div>
+        <div class="pure-menu pure-menu-horizontal article-footer">
+            {% if prev_chapter %}
+            <li class="pure-menu-item">
+            <a class="pure-menu-link" href="reverse_url('novel_chapter', chapter.novel.name, prev_chapter.id_no)">上一章：{{prev_chapter.title}}</a>
+            </li>
+            {% end %}
+            {% if next_chapter %}
+            <li class="pure-menu-item">
+            <a class="pure-menu-link" href="reverse_url('novel_chapter', chapter.novel.name, next_chapter.id_no)">下一章：{{next_chapter.title}}</a>
+            </li>
+            {% end %}
+        </div>
+        </div>
+    </div>
+</div>
+{% end %}

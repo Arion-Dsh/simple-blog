@@ -1,7 +1,6 @@
 <form method="post" accept-charset="utf-8">
-	${form.email}
-	<br/>
-	${form.password}
-	${ xsrf_form_html() }
+    {% module xsrf_form_html() %}
+    <input type="text" name="email" splaceholder="Email"/>
+    <input type="password" name="pass_word" placeholder="password" />
 	<p><input type="submit" value="Continue &rarr;"></p>
 </form>

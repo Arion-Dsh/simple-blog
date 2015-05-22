@@ -1,0 +1,62 @@
+{% extends "base.html"%}
+
+{%block name="main_body" %}
+<div class="pure-u-3-4 main-content">
+        <form method="post" class="pure-form pure-form-stacked">
+            {% module xsrf_form_html() %}
+            <legend>Add Quote</legend>
+            <div class=" pure-g add-category">
+                <div class="pure-u-3-5">
+                    <input type="text" name="quote_body" placeholder="quote" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-1-5">
+                    <input type="text" name="quote_author" placeholder="author" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-1-5">
+                    <button type="submit" class="pure-button pure-button-primary" > 确定</button>
+                </div>
+            </div>
+        </form>
+      <div class="pure-g items categories">
+          <h3 class="pure-u-1 items-title">Quotes</h3>
+          {% for quote in quotes._list%}
+          <div class='pure-u-3-5'>
+              {{quote.body}}
+          </div>
+          <div class="pure-u-1-5">
+              {{quote.author}}
+          </div>
+          <div class="pure-u-1-5">
+          <a class="pure-button button-secondary button-xsmall" href="{{reverse_url('admin_quote', quote.id_no)}}">
+            <i class="fa fa-wrench"></i>edit
+          </a>
+          </div>
+          {% end %}
+      </div>
+      <div class="pure-g items-footer">
+		{%if quotes.pages != 1 %}
+		<div class="pure-u-1">
+			<ul class="pure-paginator">
+				{%if quotes.has_prev %}
+			    <li>
+					<a class="pure-button prev" href="{{reverse_url('admin_quotes', quotes.prev_num)}}">&#171;</a>
+				</li>
+				{% end %}
+				{% for page in quotes.iter_pages( left_edge=0, left_current=0,right_current=1, right_edge=0) %}
+					{%if page %}
+						{%if page != quotes.page %}
+			    		<li><a class="pure-button" href="{{reverse_url('admin_quotes', page)}}">{{page}}</a></li>
+						{%else%}
+			    		<li><a class="pure-button pure-button-active" href="{{reverse_url('admin_quotes', page)}}">{{page}}</a></li>
+						{%end%}
+					{%end%}
+				{% end %}
+				{%if quotes.has_next %}
+			    <li><a class="pure-button next" href="{{reverse_url('admin_quotes', quotes.next_num)}}">&#187;</a></li>
+				{% end %}
+			</ul>
+		</div>
+		{%end%}
+	</div>
+</div>
+{% end %}

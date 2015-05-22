@@ -1,0 +1,47 @@
+{% extends "base.html"%}
+{% block name="title"%}{{category.name}} - {%end%}
+{%block name="main_body"%}
+<div class="pure-u-1">
+    <div class="main-block">
+    <div class="archives-list">
+        <div class="archives-header">
+            <h2>{{category.name}}</h2>
+            <p>{{category.description}}</p>
+        </div>
+        {% if not articles._list %} 
+           <p>no article yet!</p>
+        {%end%}
+        <ul>
+            {% for article in articles._list %}
+            <li><i>{{article.creat_time.strftime("%d-%M")}}</i> <a href="{{reverse_url('article', article.category.name, article.creat_time.strftime('%d-%M'), article.id_no)}}">{{article.title}}</a></li>
+            {% end %}
+        </ul>
+    </div>
+    <div class="pagination">
+       {%if articles.pages != 1 %}
+        <div class="pure-u-1">
+            <ul class="pure-menu pure-menu-horizontal">
+                {%if articles.has_prev %}
+                <li class="pure-menu-item">
+                    <a class="pure-menu-link" href="{{reverse_url('archives', category.name, articles.prev_num)}}">&#171;</a>
+                </li>
+                {% end %}
+                {% for page in articles.iter_pages() %}
+                    {%if page %}
+                        {%if page != articles.page %}
+                            <li class="pure-menu-item"><a class="pure-menu-link" href="{{reverse_url('archives', category.name, page)}}">{{page}}</a></li>
+                        {%else%}
+                            <li class="pure-menu-item"><a class="pure-menu-link pure-menu-link-active" href="{{reverse_url('archives', category.name, page)}}">{{page}}</a></li>
+                        {%end%}
+                    {%end%}
+                {% end %}
+                {%if articles.has_next %}
+                <li class="pure-menu-item"><a class="pure-menu-link" href="{{reverse_url('archives', category.name, articles.next_num)}}">&#187;</a></li>
+                {% end %}
+            </ul>
+        </div>
+        {%end%}
+    </div>
+    </div>
+</div>
+{%end%}

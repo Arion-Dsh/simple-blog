@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{%block name="main_body" %}
+<div class="pure-u-3-4 main-content">
+         <div class=" pure-g items-header">
+	    
+	        <h4  class="pure-u-5-6 items-title">Page</h4>
+	        <div class="pure-u-1-6 header-plus">
+	            <a href="{{reverse_url('admin_sigle_page_add')}}" class="pure-button button-success button-small">add</a>
+	        </div>
+	    </div>
+	    
+	<div class="pure-g items">
+		<div class="pure-u-1-6">
+			时间
+		</div>
+		<div class="pure-u-15-24"> 
+			标题
+		</div>
+		<div class="pure-u-5-24">
+			操作
+		</div>
+	</div>
+	{%for sigle_page in sigle_pages._list %}
+	<div class="pure-g items">
+		<div class="pure-u-1-6">
+			{{sigle_page.creat_time.strftime('%H:%M %m-%d')}}
+		</div>
+		<div class="pure-u-15-24">
+			<a href="{{reverse_url('admin_sigle_page', sigle_page.slug)}}">{{sigle_page.title}}</a>
+		</div>
+		<div class="pure-u-5-24">
+		        <a class="pure-button button-error button-xsmall art-del" url-bind="{{reverse_url('admin_sigle_page', sigle_page.slug)}}">
+		            <i class="fa fa-trash"></i>delete
+		        </a>
+			<a class="pure-button button-secondary button-xsmall" href="{{reverse_url('admin_sigle_page', sigle_page.slug)}}">
+			    <i class="fa fa-wrench"></i>edit
+			</a>
+		</div>
+	</div>
+	{% end %}
+	
+	<div class="pure-g">
+		{%if sigle_pages.pages != 1 %}
+		<div class="pure-u-1">
+			<ul class="pure-paginator">
+				{%if sigle_pages.has_prev %}
+			    <li>
+					<a class="pure-button prev" href="{{reverse_url('admin_sigle_pages', sigle_pages.prev_num)}}">&#171;</a>
+				</li>
+				{% end %}
+				{% for page in sigle_pages.iter_pages( left_edge=0, left_current=0,right_current=1, right_edge=0) %}
+					{%if page %}
+						{%if page != sigle_pages.page %}
+			    		<li><a class="pure-button" href="{{reverse_url('admin_sigle_pages', page)}}">{{page}}</a></li>
+						{%else%}
+			    		<li><a class="pure-button pure-button-active" href="{{reverse_url('admin_sigle_pages', page)}}">{{page}}</a></li>
+						{%end%}
+					{%end%}
+				{% end %}
+				{%if sigle_pages.has_next %}
+			    <li><a class="pure-button next" href="{{reverse_url('admin_sigle_pages', sigle_pages.next_num)}}">&#187;</a></li>
+				{% end %}
+			</ul>
+		</div>
+		{%end%}
+	</div>
+</div>
+{% end %}

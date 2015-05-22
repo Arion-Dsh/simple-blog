@@ -1,0 +1,24 @@
+{% extends "base.html"%}
+{% block name="title"%}{{novel.name}} - {%end%}
+{%block name="main_body"%}
+<div class="pure-u-1">
+    <div class="main-block">
+        <div class="novel-des bs-s">
+         {{novel.description}}
+        </div>
+        <div class="chapters-header bs-s">
+            <h2>{{novel.name}}</h2>
+        </div>
+        <div class="pure-g chapters-list">
+            {% for chapter in chapters %}
+            <div class="pure-u-1-3 pure-u-sm-1-2">
+                <div class="chapters-item bs-s">
+                    <a  class="pure-menu-link" href="{{reverse_url('novel_chapter', novel.name, chapter.id_no)}}">{{chapter.title}}</a>
+                </div>
+            </div>
+            {% end %}
+        </ul>
+    </div>
+    </div>
+</div>
+{%end%}
