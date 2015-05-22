@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #-*- coding:utf-8 -*-
 
-import bson.json_util
+import bson.py3compat
 import tornado.web
 
 from plus.pagination import Paginate
@@ -90,7 +90,7 @@ class AdminArticleSigleHandler(BaseHandler):
             article = Article.objects.get(id_no=int(id))
             imgs = ImageDoc.objects(id__in=article.img_list).all()
             for img in imgs:
-                _id = bson.json_util.string_type(img.id)
+                _id = bson.py3compat.text_type(img.id)
                 images.append(dict(
                     id=_id,
                     url=img.url,
@@ -146,10 +146,10 @@ class AdminImageHandler(BaseHandler):
         image = ImageDoc(description=description)
         image.image.put(img_data, content_type=_file[0].get('content_type'))
         image.save()
-        image.url = self.reverse_url('file_image', bson.json_util.string_type(image.id))
+        _id = bson.py3compat.text_type(image.id)
+        image.url = self.reverse_url('file_image', _id)
         image.save()
         d = image.image.read()
-        _id = bson.json_util.string_type(image.id)
         out_data = dict(
             url=image.url,
             description=image.description,
@@ -370,7 +370,7 @@ class AdminSiglePageHandler(BaseHandler):
             sigle_page = SiglePage.objects.get(slug=slug)
             imgs = ImageDoc.objects(id__in=sigle_page.img_list).all()
             for img in imgs:
-                _id = bson.json_util.string_type(img.id)
+                _id = bson.py3compat.text_type(img.id)
                 images.append(dict(
                     id=_id,
                     url=img.url,
