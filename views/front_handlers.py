@@ -14,7 +14,7 @@ class FEBaseHandler(BaseHandler):
     
     def get_random_quote(self):
         _quote = Quote.objects
-        quote = _quote(id_no=random.randrange(_quote.count())).first()
+        quote = _quote(id_no=random.randrange(_quote.count() or 1)).first()
         return quote or _quote.first()
 
 

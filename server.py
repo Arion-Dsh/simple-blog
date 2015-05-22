@@ -17,10 +17,16 @@ from views.admin_handlers import AuthLoginHandler, AuthLogoutHandler, AdminHomeH
                                  AdminNovelsHandler, AdminNovelHandler
 from views.front_handlers import HomeHandler, ArticlesHandler, ArticleHandler, \
                                     PageHandler, NovelChaptersHandler, NovelChapterHandler
+# 链接数据库
 from mongoengine import connect
+db_name = 'blog_test'
+try:
+    from local_settings import db_name
+except:
+    pass
+connect(db_name)
 
 define("port", default=8000, help="run on the given port", type=int)
-connect('blog_test')
 
 class Application (tornado.web.Application):
 

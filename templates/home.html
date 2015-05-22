@@ -2,14 +2,19 @@
 
 {%block name="main_body"%}
 <div class="pure-u-1 pos-r">
+    {% if quote%}
     <div class="quote-block pos-a">
-        <p class="quote-body">{{quote.body}}</p>
-        <p class="quote-author">——{{quote.author}}</p>
+        <p class="quote-body">{{quote.body }}</p>
+        {% if quote.author %}<p class="quote-author">——{{quote.author}}</p> {%end%}
     </div>
+    {% end %}
+    {% if image%}
     <div class="home-img">
         <img src="{{image.url}}" alt="{{image.description}}" class="pure-img"/>
     </div>
+    {% end %}
     <div class="main-block">
+        {% if articles %}
         <div class="home-items">
          <h2>最新文章</h2>
         <ul>
@@ -18,6 +23,7 @@
             {%end%}
         </ul>
     </div>
+    {% end %}
     <div class="article-content">
         {% if page%}
         {% raw page.html_content %}
