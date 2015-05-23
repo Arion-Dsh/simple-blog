@@ -75,6 +75,10 @@ dt {
 dd {
     margin: 0 0 10px 0;
 }
+textarea {
+    font-size: 14px;
+    line-height: 16px;
+}
 
 .hidden{
 	display: none !important; 
@@ -216,44 +220,4 @@ p.button-error{
 	}
 		.legal p{ margin-bottom: 5px;}
 		
-/* --------------------------
- * paginator Module Styles
- * --------------------------
-*/
-
-
-/**
-* Baby Blue theme for RainbowJS
-*
-* @author tilomitra
-*/
-
-pre {
-   word-wrap: break-word;
-   padding: 6px 10;
-   line-height: 1.3em;
-   margin-bottom: 20;
-   border: 1px solid #eee;
-}
-
-code {
-   border: none;
-   margin: 0 2px;
-   font-size: 0.8em;
-   padding: 0.4em 0.6em;
-   white-space: nowrap;
-}
-
-pre code {
-   padding: 0;
-   margin: 0;
-   font-size: 0.95em;
-   white-space: pre-wrap;
-}
-
-pre, code {
-   font-family: Consolas, 'Liberation Mono', Courier, monospace;
-   color: #333;
-   background: rgb(250, 250, 250);
-}
 

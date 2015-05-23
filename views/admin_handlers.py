@@ -119,7 +119,7 @@ class AdminArticleSigleHandler(BaseHandler):
         article.md_content = md_content
         article.translate = translate
         article.img_list = img_list
-        article.html_content=markdown.markdown(md_content)
+        article.html_content = markdown(md_content)
         article.category = Category.objects(name=category).first()
         article.save()
         self.redirect(self.reverse_url('admin_article_edit', article.id_no))
@@ -346,7 +346,7 @@ class AdminNovelCapterHandler (BaseHandler):
         novel_chapter.active = active
         novel_chapter.creat_time = creat_time
         novel_chapter.md_content = md_content
-        novel_chapter.html_content = markdown.markdown(md_content)
+        novel_chapter.html_content = markdown(md_content)
         novel_chapter.novel = Novel.objects(name=novel).first()
         novel_chapter.save()
         self.redirect(self.reverse_url('admin_novel_chapter', novel_chapter.id_no))
@@ -398,7 +398,7 @@ class AdminSiglePageHandler(BaseHandler):
         sigle_page.md_content = md_content
         sigle_page.translate = translate
         sigle_page.img_list = img_list
-        sigle_page.html_content=markdown.markdown(md_content)
+        sigle_page.html_content = markdown(md_content)
         try:
             sigle_page.save()
         except:

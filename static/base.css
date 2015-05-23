@@ -54,12 +54,39 @@ blockquote {
 p {
     margin: 10px 0;
 }
-ol,
-ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+pre {
+    background: rgba(0, 0, 0, .1);
+    word-wrap: break-word;
+    padding: 6px 10px;
+    line-height: 1.3em;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
 }
+
+code {
+    display: block;
+    background-color: rgba(0, 0, 0, .1);
+    border: 1px solid #e4e4e4;
+    margin: 0 2px;
+    font-size: 0.8em;
+    padding: 0.4em 0.6em;
+    white-space: nowrap;
+}
+
+pre code {
+    background-color: initial;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.95em;
+    white-space: pre-wrap;
+}
+
+pre, code {
+   color: #333;
+}
+
+
 .pure-menu-link-active {
     background-color: #eee;
 }
@@ -121,7 +148,7 @@ ul {
     letter-spacing:.1px;
     margin: 0 0 16px  0;
     padding-bottom: 16px;
-    min-height: 500px;
+    min-height: 300px;
 }
 #main-cont .home-items {
     padding: 16px 0 28px;
@@ -130,6 +157,12 @@ ul {
 }
 #main-cont .home-items h2 {
     margin-top: 0;
+}
+#main-cont .home-items ul,
+#main-cont .archives-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 #main-cont .home-items ul li i {
     margin-right: 10px;
@@ -168,6 +201,16 @@ ul {
 }
 #main-cont .article-content p {
     margin: 0;
+}
+#main-cont .article-content .cont-img {
+    margin: 16px 0;
+}
+#main-cont .article-content .cont-img .cont-img-dec {
+    width: 120px;
+    left: -136px;
+}
+#main-cont .article-content .cont-img .cont-img-dec p {
+    text-align: right;
 }
 #main-cont .article-footer {
     text-align: center;
@@ -225,9 +268,10 @@ ul {
     text-decoration: none;
     white-space: normal;
 }
-
+#main-cont .comments {
+   margin-bottom: 32px;
+}
 #footer {
-    margin: 48px 0 0;
     padding: 16px 0;
     border-top: 1px solid #eee;
 }
