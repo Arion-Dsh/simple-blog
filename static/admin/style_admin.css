@@ -160,7 +160,7 @@ p.button-error{
 		margin-bottom: 1em;
 	}
     .main-content {
-    
+        font-size: 14px;
     }
         .main-content .add-quote button {
             margin: .25em 0;

@@ -14,7 +14,7 @@
 		<div class="pure-u-1-6">
 			时间
 		</div>
-		<div class="pure-u-3-8">
+		<div class="pure-u-7-24">
 			标题
 		</div>
 		<div class="pure-u-1-6">
@@ -23,7 +23,7 @@
 		<div class="pure-u-1-12">
 			active
 		</div>
-		<div class="pure-u-5-24">
+		<div class="pure-u-7-24">
 			操作
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 		<div class="pure-u-1-6">
 			{{article.creat_time.strftime('%H:%M %m-%d')}}
 		</div>
-		<div class="pure-u-3-8">
+		<div class="pure-u-7-24">
 			<a href="{{reverse_url('admin_article_edit', article.id_no)}}">{{article.title}}</a>
 		</div>
 		<div class="pure-u-1-6">
@@ -45,12 +45,15 @@
 			<i class="fa fa-close"></i>
 			{% end %}
 		</div>
-		<div class="pure-u-5-24">
-		        <a class="pure-button button-error button-xsmall art-del" url-bind="{{reverse_url('admin_article_del', article.id_no)}}">
+		<div class="pure-u-7-24">
+		        <a  href="#" class="art-del" url-bind="{{reverse_url('admin_article_del', article.id_no)}}">
 		            <i class="fa fa-trash"></i>delete
 		        </a>
-			<a class="pure-button button-secondary button-xsmall" href="{{reverse_url('admin_article_edit', article.id_no)}}">
+			<a href="{{reverse_url('admin_article_edit', article.id_no)}}">
 			    <i class="fa fa-wrench"></i>edit
+			</a>
+			<a href="{{reverse_url('article', article.category.name, article.creat_time.strftime('%d-%M'), article.id_no)}}" target="_back">
+			    <i class="fa fa-share"></i>show
 			</a>
 		</div>
 	</div>
