@@ -316,8 +316,7 @@ pre, code {
     min-height: 100px;
 }
 #main-cont .home-img {
-    margin-top: 0;
-    padding: 0 16px;
+    margin: 0 16px 16px;
 }
 #main-cont .home-items {
     padding: 0 0 15px 0;
