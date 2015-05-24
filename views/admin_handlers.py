@@ -106,7 +106,7 @@ class AdminArticleSigleHandler(BaseHandler):
         title = self.get_argument('title')
         active = int(self.get_argument('active', 1))
         category = self.get_argument('category', '')
-        creat_time = self.get_argument('creat_time', '')
+        creat_time = self.get_argument('creat_time')
         md_content = self.get_argument('md_content', '')
         translate = self.get_argument('translate','')
         img_list = bson.json_util.loads(self.get_argument('img_list', "[]").replace("\'","\""))
@@ -116,6 +116,7 @@ class AdminArticleSigleHandler(BaseHandler):
             article = Article.objects.get(id_no=int(id))
         article.title = title
         article.active = active
+        article.creat_time = creat_time
         article.md_content = md_content
         article.translate = translate
         article.img_list = img_list
@@ -384,7 +385,7 @@ class AdminSiglePageHandler(BaseHandler):
         title = self.get_argument('title')
         _slug = self.get_argument('_slug', '')
         category = self.get_argument('category', '')
-        creat_time = self.get_argument('creat_time', '')
+        creat_time = self.get_argument('creat_time')
         md_content = self.get_argument('md_content', '')
         translate = self.get_argument('translate','')
         img_list = bson.json_util.loads(self.get_argument('img_list', "[]").replace("\'","\""))
@@ -394,6 +395,7 @@ class AdminSiglePageHandler(BaseHandler):
             sigle_page= SiglePage.objects(slug=slug).first()
         sigle_page.title = title
         sigle_page.slug = slug if slug else _slug
+        sigle_page.creat_time = creat_time
         sigle_page.category = category
         sigle_page.md_content = md_content
         sigle_page.translate = translate
