@@ -9,7 +9,7 @@ class MyReader(mistune.Renderer):
 
     def article_img(self, url, dec, sdec=None):
         if sdec == 'None': sdec = ''
-        out = """<div class='cont-img pos-r'><div class='cont-img-dec pos-a'>%s <p>%s</></div><img src='%s' alt='%s' class="pure-img bdr-s"/></div>'""" % (dec, sdec, url, dec)
+        out = """<div class='cont-img pos-r'><div class='cont-img-dec pos-a'>%s<p>%s</></div><img src='%s' alt='%s' class="pure-img bdr-s"/></div>""" % (dec, sdec, url, dec)
         return out
 
 
