@@ -13,7 +13,7 @@
         {%end%}
         <ul>
             {% for article in articles._list %}
-            <li><i>{{article.creat_time.strftime("%d-%M")}}</i> <a href="{{reverse_url('article', article.category.name, article.creat_time.strftime('%d-%M'), article.id_no)}}">{{article.title}}</a></li>
+            <li><i>{{article.creat_time.strftime("%d-%m")}}</i> <a href="{{reverse_url('article', article.category.name, article.creat_time.strftime('%d-%M'), article.id_no)}}">{{article.title}}</a></li>
             {% end %}
         </ul>
     </div>

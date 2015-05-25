@@ -13,7 +13,7 @@
         {% set _article = article or page%}
         <div class="article-header">
             <h1>{{_article.title}}</h1>
-            <p>{{_article.creat_time.strftime('%d-%M')}}</p>
+            <p>{{_article.creat_time.strftime('%d-%m')}}</p>
         </div>
         <div class="article-content">
             {% raw _article.html_content %}
