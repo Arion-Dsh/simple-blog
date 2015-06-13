@@ -60,7 +60,7 @@ class NovelChaptersHandler(FEBaseHandler):
 
     def get(self, name):
         novel = Novel.objects(name=name).first()
-        chapters = Chapter.objects(novel=novel).all()
+        chapters = Chapter.objects(novel=novel, active=1).all()
         self.render('novel_chapters.html', novel=novel, chapters=chapters)
 
 

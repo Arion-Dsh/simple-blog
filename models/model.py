@@ -17,7 +17,7 @@ class ImageDoc(Document):
     creat_time = DateTimeField(default=datetime.datetime.now)
 
 
-class User (Document):
+class User(Document):
     
     id_no = SequenceField()
     name = StringField()
@@ -87,7 +87,7 @@ class SiglePage(BaseArticle):
     }
 
 
-class Quote (Document):
+class Quote(Document):
     
     id_no = SequenceField()
     body = StringField(required=True, unique=True)
@@ -98,3 +98,5 @@ class Quote (Document):
         'ordering' : ['-creat_time'],
     }
 
+
+__all__ = ['ImageDoc', 'User', 'Category', 'Article', 'Novel', 'Chapter', 'SiglePage', 'Quote']

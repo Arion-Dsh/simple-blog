@@ -24,14 +24,13 @@ try:
     from local_settings import db_name
 except:
     pass
-connect(db_name)
+db = connect(db_name)
 
 define("port", default=8000, help="run on the given port", type=int)
 
 class Application (tornado.web.Application):
-
-    def __init__(self):
-        handlers = [
+    
+    handlers = [
             tornado.web.URLSpec(r'/', HomeHandler, name='home'),
             tornado.web.URLSpec(r'/(zh-hans|en-us)/([0-9]+)', ArticlesHandler, name='archives'),
             tornado.web.URLSpec(r'/(zh-hans|en-us)/([\d]+-[\d]+)/([^/]+)', ArticleHandler, name="article"),
@@ -60,17 +59,20 @@ class Application (tornado.web.Application):
             tornado.web.URLSpec(r'/admin/novel-chapter/sigle', AdminNovelCapterHandler, name="admin_novel_chapter_sigle"),
             tornado.web.URLSpec(r'/admin/images/upload', AdminImageHandler, name="admin_image_upload"),
             tornado.web.URLSpec(r'/admin/images/([\w]+)/del', AdminImageHandler, name="admin_image_del")
-        ]
-        settings = dict(
-            template_path=os.path.join(os.path.dirname(__file__), 'templates'),
-            static_path=os.path.join(os.path.dirname(__file__), 'static'),
-            xsrf_cookies=True,
-            cookie_secret= u'Arion&kelly',
-            login_url='/auth/login',
-            debug=True,
-            gzip=True,
-        )
-        tornado.web.Application.__init__(self, handlers, **settings)
+    ]
+    settings = dict(
+        template_path=os.path.join(os.path.dirname(__file__), 'templates'),
+        static_path=os.path.join(os.path.dirname(__file__), 'static'),
+        xsrf_cookies=True,
+        cookie_secret= 'Arion&kelly',
+        login_url='/auth/login',
+        debug=True,
+        gzip=True,
+    )
+    def __init__(self):
+        handlers = self.handlers
+        settings = self.settings
+        super(Application, self).__init__(handlers, **settings)
 
 def main():
     tornado.options.parse_command_line()

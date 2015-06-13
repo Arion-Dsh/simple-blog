@@ -57,7 +57,7 @@ class AdminHomeHandler(BaseHandler):
     @tornado.web.authenticated
     def post(self):
         quote_body = self.get_argument('quote_body', None)
-        quote_author = self.get_argument('quote_body', None)
+        quote_author = self.get_argument('quote_author', None)
         
         quote = Quote()
         quote.body = quote_body
