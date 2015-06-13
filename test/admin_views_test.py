@@ -19,11 +19,12 @@ class AdminViewsTest (BaseCase):
     
     def get_headers(self):
         cookie = create_signed_value(self.app.settings['cookie_secret'],
-                                    'login_user', '1234')
-        headers = dict(COOKIE=cookie)
+                                    'login_user', '1234').decode()
+        headers = dict(COOKIE='login_user=%s' %cookie)
         return headers 
     
     def test_login(self):
+        headers = self.get_headers()
         url = "/auth/login"
         response = self.fetch(url)
         self.assertIn(b'email', response.body)
@@ -32,15 +33,17 @@ class AdminViewsTest (BaseCase):
             email = 'einmagic@gmail.com',
             pass_word = '12345'
         ))
-        response = self.fetch(url, method="POST", body=body)
-    
+        response = self.fetch(url, method="POST", headers=headers, body=body)
+        self.assertIn(b'Add Quote', response.body)
+        
     def test_home_get(self):
         headers = self.get_headers()
         response = self.fetch('/admin', headers=headers)
         body = response.body.decode()
-        self.assertIn('Arion. All rights reserved.', body)
+        self.assertIn('Add Quote', body)
     
-    def home_post(self):
+    def test_home_post(self):
+        headers = self.get_headers()
         body = urlencode(dict(quote_body="test quo body", quote_author= "arion"))
-        response = self.fetch('/admin', method="POST", body=body)
+        response = self.fetch('/admin', method="POST", headers=headers, body=body)
         self.assertEqual(response.code, 200)
