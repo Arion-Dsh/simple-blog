@@ -28,7 +28,7 @@ class User(Document):
 class Category(Document):
 
     id_no = SequenceField()
-    create = DateTimeField(default=datetime.datetime.now)
+    create_time = DateTimeField(default=datetime.datetime.now)
     name = StringField(unique=True)
     description = StringField()
 

@@ -16,7 +16,7 @@ class BaseQuerySet(QuerySet):
 
     def paginate(self, page=1, per_page=10):
         page = int(page)
-        per_page = int(page)
+        per_page = int(per_page)
         if page < 1:
             page = 1
         items = self.limit(per_page).skip((page-1)*per_page).all()

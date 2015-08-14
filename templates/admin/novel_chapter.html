@@ -8,8 +8,8 @@
                 <legend>chapter</legend>
                 <label for="title">title</label>
                 <input type="text" name="title" id ="title" value="{{novel_chapter.title or ''}}" placeholder="title" required>
-                <label for="create">create</label>
-                <input type="text" name="create" id="create" value="{{novel_chapter.create_time.strftime('%Y-%m-%d %H:%M')}}" placeholder="create"/>
+                <label for="create_time">create</label>
+                <input type="text" name="create_time" id="create_time" value="{{novel_chapter.create_time.strftime('%Y-%m-%d %H:%M')}}" placeholder="create_time"/>
                 <label for="active">active</label>
                 <select id="active" name='active' value="{{novel_chapter.active}}">
                     <option value="1" {% if novel_chapter.active is 1%} selected {% end %}>yes</option>

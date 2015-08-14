@@ -11,8 +11,8 @@
                 <input type="text" class="form-imgs hidden" name='img_list' value="{{article.img_list}}">
                 <label for="title"> title </label>
                 <input type="text" name="title" value="{{article.title or ''}}" placeholder="title" required>
-                <label for="create">create </label>
-                <input type="text" name="create" value="{{article.create_time.strftime('%Y-%m-%d %H:%M')}}" placeholder="create"/>
+                <label for="create_time">create </label>
+                <input type="text" name="create_time" value="{{article.create_time.strftime('%Y-%m-%d %H:%M')}}" placeholder="create_time"/>
                 <label>active</label>
                 <select id="active" name='active' value="{{article.active}}">
                     <option value="1" {% if article.active is 1%} selected {% end %}>yes</option>

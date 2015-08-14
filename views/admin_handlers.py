@@ -115,6 +115,7 @@ class AdminArticleSigleHandler(BaseHandler):
                                         .replace("\'", "\""))
 
         article = Article()
+        print(create_time)
         if id:
             article = Article.objects.get(id_no=int(id))
         article.title = title
@@ -340,7 +341,7 @@ class AdminNovelCapterHandler (BaseHandler):
     @tornado.web.authenticated
     def post(self, id=None):
         title = self.get_argument('title')
-        create = self.get_argument('create')
+        create_time = self.get_argument('create_time')
         active = int(self.get_argument('active', 1))
         novel = self.get_argument('novel')
         md_content = self.get_argument('md_content', '')
@@ -350,7 +351,7 @@ class AdminNovelCapterHandler (BaseHandler):
             novel_chapter = Chapter.objects.get(id_no=id)
         novel_chapter.title = title
         novel_chapter.active = active
-        novel_chapter.create = create
+        novel_chapter.create_time = create_time
         novel_chapter.md_content = md_content
         novel_chapter.html_content = markdown(md_content)
         novel_chapter.novel = Novel.objects(name=novel).first()
@@ -392,7 +393,7 @@ class AdminSiglePageHandler(BaseHandler):
         title = self.get_argument('title')
         _slug = self.get_argument('_slug', '')
         category = self.get_argument('category', '')
-        create = self.get_argument('create')
+        create_time = self.get_argument('create_time')
         md_content = self.get_argument('md_content', '')
         translate = self.get_argument('translate', '')
         img_list = bson.json_util.loads(self.get_argument('img_list', "[]")
@@ -403,7 +404,7 @@ class AdminSiglePageHandler(BaseHandler):
             sigle_page = SiglePage.objects(slug=slug).first()
         sigle_page.title = title
         sigle_page.slug = slug if slug else _slug
-        sigle_page.create = create
+        sigle_page.create_time = create_time
         sigle_page.category = category
         sigle_page.md_content = md_content
         sigle_page.translate = translate

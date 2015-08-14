@@ -12,8 +12,8 @@
                 <input type="text" class="form-imgs hidden" name='img_list' value="{{sigle_page.img_list}}">
                 <label for="title"> title </label>
                 <input type="text" name="title" value="{{sigle_page.title or ''}}" placeholder="title" required>
-                <label for="create">create </label>
-                <input type="text" name="create" value="{{sigle_page.create_time.strftime('%Y-%m-%d %H:%M')}}" placeholder="create"/>
+                <label for="create_time">create </label>
+                <input type="text" name="create_time" value="{{sigle_page.create_time.strftime('%Y-%m-%d %H:%M')}}" placeholder="create_time"/>
                 <label for="slug">slug</label>
                 <input type="text" name="_slug"  value="{{sigle_page.slug or ''}}" {% if sigle_page.slug %} disabled {% end %} placeholder="slug" />
                 <label for="md_content"> md_content </label>
