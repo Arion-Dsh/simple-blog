@@ -2,17 +2,17 @@
 
 {%block name="main_body" %}
 <div class="pure-u-3-4 main-content">
-        
+
         <form class="pure-form pure-form-stacked article-form" method="post">
-            
+
             <fieldset>
                 <legend >Article</legend>
                 {% module xsrf_form_html() %}
                 <input type="text" class="form-imgs hidden" name='img_list' value="{{article.img_list}}">
                 <label for="title"> title </label>
                 <input type="text" name="title" value="{{article.title or ''}}" placeholder="title" required>
-                <label for="creat_time">creat_time </label>
-                <input type="text" name="creat_time" value="{{article.creat_time.strftime('%Y-%m-%d %H:%M')}}" placeholder="creat_time"/>
+                <label for="create">create </label>
+                <input type="text" name="create" value="{{article.create_time.strftime('%Y-%m-%d %H:%M')}}" placeholder="create"/>
                 <label>active</label>
                 <select id="active" name='active' value="{{article.active}}">
                     <option value="1" {% if article.active is 1%} selected {% end %}>yes</option>
@@ -26,7 +26,7 @@
                 <label for="md_content"> md_content </label>
                 <textarea name="md_content" placeholder="markdown" rows="12" cols="40" required>{{article.md_content or ''}}</textarea>
                 <button type="submit" class="pure-button pure-button-primary">提交</button>
-                
+
             </fieldset>
         </form>
     <div class="pure-g">
@@ -38,9 +38,9 @@
                     <input type="file" name="file" required class="pure-u-23-24"/>
                     <label for="description">描述</label>
                     <input type="text" name="description" required placeholder="description" class="pure-u-23-24"/>
-                    
+
                     <button type="submit" class="pure-button pure-button-primary img-del">上传</button>
-                    
+
                 </fieldset>
             </form>
         </div>
@@ -54,7 +54,7 @@
                     <div class="pure-u-1-2">
                         <span class='img-description'>描述：{{ image.get('description')}}</span><br />
                         <span class='img-url'>url：{{ image.get('url')}}</span>
-                        
+
                     </div>
                     <div class="pure-u-1-4">
                         <button class="pure-button button-error button-small img-del" data-id="{{image.get('id')}}" data-del-url="{{image.get('del_url')}}">delete</button>
@@ -67,4 +67,3 @@
 </div>
 </div>
 {% end %}
-

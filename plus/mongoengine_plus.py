@@ -1,49 +1,75 @@
+# !/usr/bin/env python3
 # -*- coding:utf-8 -*-
+
 import math
-from tornado import gen
+from mongoengine import Document as Doc
+from mongoengine.queryset import QuerySet
+
+
+class QueryPaginateError(Exception):
+    """docstring for QueryPaginateError"""
+    pass
+
+
+class BaseQuerySet(QuerySet):
+    """docstring for BaseQuerySet"""
+
+    def paginate(self, page=1, per_page=10):
+        page = int(page)
+        per_page = int(page)
+        if page < 1:
+            page = 1
+        items = self.limit(per_page).skip((page-1)*per_page).all()
+        return Paginate(self, page, per_page, items)
+
+
+class Document(Doc):
+    """docstring for Document"""
+    meta = {'abstract': True,
+            'queryset_class': BaseQuerySet}
 
 
 class Paginate(object):
-    
-    def __init__(self, date, page, per_page ):
+
+    def __init__(self, query, page, per_page, items):
         """docstring for __init__"""
         self.page = int(page)
         self.per_page = int(per_page)
-        self.total = len(date)
-        self.date = date
-        
-       
-    @property   
-    def _list(self):
-        
-        start_index = (self.page - 1) * self.per_page
-        end_index = self.page * self.per_page
-        
-        return self.date[start_index:end_index].all()
-        
-    @property 
+        self.total = len(items)
+        self.query = query
+        self._list = items
+
+    @property
     def pages(self):
         """The total number of pages"""
         return int(math.ceil(self.total / float(self.per_page)))
+
+    def prev(self):
+        return self.query.paginate(self.page-1, self.per_page)
+
     @property
     def prev_num(self):
         """Number of the previous page."""
         return self.page - 1
+
     @property
     def has_prev(self):
         """True if a previous page exists"""
         return self.page > 1
+
+    def next(self):
+        return self.query.paginate(self.page+1, self.per_page)
+
     @property
     def has_next(self):
         """True if a next page exists."""
         return self.page < self.pages
+
     @property
     def next_num(self):
         """Number of the next page"""
         return self.page + 1
-    
-    
-    
+
     def iter_pages(self, left_edge=2, left_current=2,
                    right_current=5, right_edge=2):
         """Iterates over the page numbers in the pagination.  The four

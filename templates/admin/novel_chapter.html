@@ -8,8 +8,8 @@
                 <legend>chapter</legend>
                 <label for="title">title</label>
                 <input type="text" name="title" id ="title" value="{{novel_chapter.title or ''}}" placeholder="title" required>
-                <label for="creat_time">creat_time</label>
-                <input type="text" name="creat_time" id="creat_time" value="{{novel_chapter.creat_time.strftime('%Y-%m-%d %H:%M')}}" placeholder="creat_time"/>
+                <label for="create">create</label>
+                <input type="text" name="create" id="create" value="{{novel_chapter.create_time.strftime('%Y-%m-%d %H:%M')}}" placeholder="create"/>
                 <label for="active">active</label>
                 <select id="active" name='active' value="{{novel_chapter.active}}">
                     <option value="1" {% if novel_chapter.active is 1%} selected {% end %}>yes</option>
@@ -24,7 +24,7 @@
                 <label for="md_content">md_content</label>
                 <textarea name="md_content" id="md_content" placeholder="markdown" rows="12" cols="40" required>{{novel_chapter.md_content or ''}}</textarea>
                 <button type="submit" class="pure-button pure-button-primary">提交</button>
-                
+
             </fieldset>
         </form>
 </div>

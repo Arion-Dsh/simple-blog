@@ -1,15 +1,20 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 import copy
 import re
 import mistune
 
+
 class MyReader(mistune.Renderer):
 
     def article_img(self, url, dec, sdec=None):
-        if sdec == 'None': sdec = ''
-        out = """<div class='cont-img pos-r'><div class='cont-img-dec pos-a'>%s<p>%s</></div><img src='%s' alt='%s' class="pure-img bdr-s"/></div>""" % (dec, sdec, url, dec)
+        if sdec == 'None':
+            sdec = ''
+        out = """<div class='cont-img pos-r'>
+                <div class='cont-img-dec pos-a'>%s<p>%s</></div>
+                <img src='%s' alt='%s' class="pure-img bdr-s"/></div>""" \
+                % (dec, sdec, url, dec)
         return out
 
 
@@ -33,7 +38,7 @@ class MyBlockLexer(mistune.BlockLexer):
 
     def parse_article_img(self, m):
         text = m.group(1)
-        dec, sdec, url= text.split('|')
+        dec, sdec, url = text.split('|')
         self.tokens.append({
             'type': 'article_img',
             'dec': dec,
@@ -43,7 +48,7 @@ class MyBlockLexer(mistune.BlockLexer):
 
 
 class MyMarkdown(mistune.Markdown):
-    
+
     def output_article_img(self):
         dec = self.token['dec']
         url = self.token['url']

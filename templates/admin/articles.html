@@ -3,13 +3,13 @@
 {%block name="main_body" %}
 <div class="pure-u-3-4 main-content" >
          <div class=" pure-g items-header">
-	    
+
 	        <h4  class="pure-u-5-6 items-title">Article</h4>
 	        <div class="pure-u-1-6 header-plus">
 	            <a href="{{reverse_url('admin_article_add')}}" class="pure-button button-success button-small">add</a>
 	        </div>
 	    </div>
-	    
+
 	<div class="pure-g items">
 		<div class="pure-u-1-6">
 			时间
@@ -30,7 +30,7 @@
 	{%for article in articles._list %}
 	<div class="pure-g items">
 		<div class="pure-u-1-6">
-			{{article.creat_time.strftime('%H:%M %m-%d')}}
+			{{article.create_time.strftime('%H:%M %m-%d')}}
 		</div>
 		<div class="pure-u-7-24">
 			<a href="{{reverse_url('admin_article_edit', article.id_no)}}">{{article.title}}</a>
@@ -52,13 +52,13 @@
 			<a href="{{reverse_url('admin_article_edit', article.id_no)}}">
 			    <i class="fa fa-wrench"></i>edit
 			</a>
-			<a href="{{reverse_url('article', article.category.name, article.creat_time.strftime('%d-%m'), article.id_no)}}" target="_back">
+			<a href="{{reverse_url('article', article.category.name, article.create_time.strftime('%d-%m'), article.id_no)}}" target="_back">
 			    <i class="fa fa-share"></i>show
 			</a>
 		</div>
 	</div>
 	{% end %}
-	
+
 	<div class="pure-g articles-footer">
 		{%if articles.pages != 1 %}
 		<div class="pure-u-1">

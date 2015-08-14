@@ -3,18 +3,18 @@
 {%block name="main_body" %}
 <div class="pure-u-3-4 main-content">
          <div class=" pure-g items-header">
-	    
+
 	        <h4  class="pure-u-5-6 items-title">Page</h4>
 	        <div class="pure-u-1-6 header-plus">
 	            <a href="{{reverse_url('admin_sigle_page_add')}}" class="pure-button button-success button-small">add</a>
 	        </div>
 	    </div>
-	    
+
 	<div class="pure-g items">
 		<div class="pure-u-1-6">
 			时间
 		</div>
-		<div class="pure-u-15-24"> 
+		<div class="pure-u-15-24">
 			标题
 		</div>
 		<div class="pure-u-5-24">
@@ -24,7 +24,7 @@
 	{%for sigle_page in sigle_pages._list %}
 	<div class="pure-g items">
 		<div class="pure-u-1-6">
-			{{sigle_page.creat_time.strftime('%H:%M %m-%d')}}
+			{{sigle_page.create_time.strftime('%H:%M %m-%d')}}
 		</div>
 		<div class="pure-u-15-24">
 			<a href="{{reverse_url('admin_sigle_page', sigle_page.slug)}}">{{sigle_page.title}}</a>
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	{% end %}
-	
+
 	<div class="pure-g">
 		{%if sigle_pages.pages != 1 %}
 		<div class="pure-u-1">

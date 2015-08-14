@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
-import bson.json_util
 import random
-import tornado.web
-
-from plus.pagination import Paginate
-from models.model import Article, Quote, ImageDoc, Category, Novel, Chapter, SiglePage
+from models.model import Article, Quote, ImageDoc, Category,\
+    Novel, Chapter, SiglePage
 from views import BaseHandler
 
 
 class FEBaseHandler(BaseHandler):
-    
+
     def get_random_quote(self):
         _quote = Quote.objects
         quote = _quote(id_no=random.randrange(_quote.count() or 1)).first()
@@ -28,16 +25,19 @@ class HomeHandler(FEBaseHandler):
             image = ImageDoc.objects(id__in=page.img_list).first()
         category = Category.objects(name='zh-hans').first()
         articles = Article.objects(category=category, active=1)[:5].all()
-        self.render('home.html', page=page, articles=articles, image=image, quote=quote)
+        self.render('home.html', page=page, articles=articles,
+                    image=image, quote=quote)
 
 
 class ArticlesHandler(FEBaseHandler):
 
     def get(self, category, page=1, per_page=10):
         category = Category.objects(name=category).first()
-        articles=Paginate(Article.objects(category=category, active=1), page, per_page)
+        articles = Article.objects(category=category, active=1)\
+                          .paginate(page, per_page)
         quote = self.get_random_quote()
-        self.render('list.html', category=category, articles=articles, quote=quote)
+        self.render('list.html', category=category,
+                    articles=articles, quote=quote)
 
 
 class ArticleHandler(FEBaseHandler):
@@ -72,6 +72,6 @@ class NovelChapterHandler(FEBaseHandler):
         chapter = Chapter.objects(id_no=int(id), novel=novel).first()
         prev_chapter = Chapter.objects(id_no__lt=int(id), novel=novel).first()
         next_chapter = Chapter.objects(id_no__gt=int(id), novel=novel).first()
-        self.render('novel_chapter.html', chapter = chapter, prev_chapter=prev_chapter,
+        self.render('novel_chapter.html', chapter=chapter,
+                    prev_chapter=prev_chapter,
                     next_chapter=next_chapter, quote=quote)
-        

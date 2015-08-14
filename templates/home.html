@@ -19,7 +19,7 @@
          <h2>最新文章</h2>
         <ul>
             {% for article in articles%}
-            <li><i>{{article.creat_time.strftime('%d-%m')}}</i> <a href="{{reverse_url('article', 'zh-hans', article.creat_time.strftime('%d-%m'), article.id_no)}}">{{article.title}}</a> </li>
+            <li><i>{{article.create_time.strftime('%d-%m')}}</i> <a href="{{reverse_url('article', 'zh-hans', article.create_time.strftime('%d-%m'), article.id_no)}}">{{article.title}}</a> </li>
             {%end%}
         </ul>
     </div>

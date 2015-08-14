@@ -9,9 +9,9 @@
 	        </div>
 	  </div>
 	<div class="pure-g items">
-	    
+
 		<div class="pure-u-1-6">
-			creat_time
+			create
 		</div>
 		<div class="pure-u-3-8">
 			title
@@ -29,7 +29,7 @@
 	{%for chapter in novel_chapters._list %}
 	<div class="pure-g items">
 		<div class="pure-u-1-6">
-			{{chapter.creat_time.strftime('%H:%M %m-%d')}}
+			{{chapter.create_time.strftime('%H:%M %m-%d')}}
 		</div>
 		<div class="pure-u-3-8">
 			<a href="{{reverse_url('admin_novel_chapter', chapter.id_no)}}">{{chapter.title}}</a>
@@ -51,7 +51,7 @@
 		</div>
 	</div>
 	{% end %}
-	
+
 	<div class="pure-g items-footer">
 		{%if novel_chapters.pages != 1 %}
 		<div class="pure-u-1">

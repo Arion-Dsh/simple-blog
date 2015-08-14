@@ -1,5 +1,6 @@
 import tornado.escape
 
+
 class FlashMessageMixIn(object):
     """
         Store a message between requests which the user needs to see.
@@ -11,7 +12,7 @@ class FlashMessageMixIn(object):
 
         base.html
         ------------
-        
+
         {% set messages = handler.get_flashed_messages() %}
         {% if messages %}
         <div id="flashed">
@@ -24,13 +25,14 @@ class FlashMessageMixIn(object):
     def flash(self, message, category='message'):
         messages = self.messages()
         messages.append((category, message))
-        self.set_secure_cookie('flash_messages', tornado.escape.json_encode(messages))
-    
+        self.set_secure_cookie('flash_messages',
+                               tornado.escape.json_encode(messages))
+
     def messages(self):
         messages = self.get_secure_cookie('flash_messages')
         messages = tornado.escape.json_decode(messages) if messages else []
         return messages
-        
+
     def get_flashed_messages(self):
         messages = self.messages()
         self.clear_cookie('flash_messages')

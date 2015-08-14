@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 import bson.py3compat
 import tornado.web
 
-from plus.pagination import Paginate
 from plus.markdown import markdown
-from models.model import Article, Quote, User, ImageDoc, Category, Novel, SiglePage, \
-                         Chapter
+from models.model import Article, Quote, User, ImageDoc, Category,\
+    Novel, SiglePage, Chapter
 from views import BaseHandler
 
+
 class AuthLoginHandler(BaseHandler):
-    
+
     def get(self):
         self.render('admin/login.html')
-    
+
     def post(self):
         email = self.get_argument('email', None)
         pass_word = self.get_argument('pass_word', None)
-        
+
         if not (email or pass_word):
             self.flash('validationError.', 'Error')
             return
@@ -32,12 +32,13 @@ class AuthLoginHandler(BaseHandler):
                 pass_word=pass_word
             )
             user.save()
-            
+
         if user.pass_word != pass_word:
             self.flash('password is wrong!', 'Error')
             return
         self.set_secure_cookie('login_user', email)
-        self.redirect(self.get_argument('next', self.reverse_url("admin_home")))
+        self.redirect(self.get_argument('next',
+                                        self.reverse_url("admin_home")))
 
 
 class AuthLogoutHandler(BaseHandler):
@@ -48,40 +49,40 @@ class AuthLogoutHandler(BaseHandler):
 
 
 class AdminHomeHandler(BaseHandler):
-    
+
     @tornado.web.authenticated
     def get(self):
         articles = Article.objects(is_del=False)[:5].all()
         self.render('admin/home.html', articles=articles)
-    
+
     @tornado.web.authenticated
     def post(self):
         quote_body = self.get_argument('quote_body', None)
         quote_author = self.get_argument('quote_author', None)
-        
+
         quote = Quote()
         quote.body = quote_body
         quote.author = quote_author
-        
+
         try:
             quote.save()
         except:
             self.flash('validationError.', 'Error')
             return
-        
+
         self.redirect(self.reverse_url("admin_home"))
 
 
 class AdminArticlesHandler(BaseHandler):
-    
+
     @tornado.web.authenticated
     def get(self, page=1, per_page=10):
-        objects = Paginate(Article.objects(is_del=False), page, per_page)
+        objects = Article.objects(is_del=False).paginate(page, per_page)
         self.render('admin/articles.html', articles=objects)
 
 
 class AdminArticleSigleHandler(BaseHandler):
-    
+
     @tornado.web.authenticated
     def get(self, id=None):
         article = Article()
@@ -98,25 +99,27 @@ class AdminArticleSigleHandler(BaseHandler):
                     del_url=self.reverse_url('admin_image_del', _id)
                 ))
         categories = Category.objects.all()
-        self.render('admin/article.html', article=article, images=images, categories=categories)
-     
+        self.render('admin/article.html', article=article, images=images,
+                    categories=categories)
+
     @tornado.web.authenticated
     def post(self, id=None):
 
         title = self.get_argument('title')
         active = int(self.get_argument('active', 1))
         category = self.get_argument('category', '')
-        creat_time = self.get_argument('creat_time')
+        create_time = self.get_argument('create_time')
         md_content = self.get_argument('md_content', '')
-        translate = self.get_argument('translate','')
-        img_list = bson.json_util.loads(self.get_argument('img_list', "[]").replace("\'","\""))
-        
+        translate = self.get_argument('translate', '')
+        img_list = bson.json_util.loads(self.get_argument('img_list', "[]")
+                                        .replace("\'", "\""))
+
         article = Article()
         if id:
             article = Article.objects.get(id_no=int(id))
         article.title = title
         article.active = active
-        article.creat_time = creat_time
+        article.create_time = create_time
         article.md_content = md_content
         article.translate = translate
         article.img_list = img_list
@@ -124,7 +127,7 @@ class AdminArticleSigleHandler(BaseHandler):
         article.category = Category.objects(name=category).first()
         article.save()
         self.redirect(self.reverse_url('admin_article_edit', article.id_no))
-        
+
     @tornado.web.authenticated
     def delete(self, id):
         article = Article.objects.get(id_no=int(id))
@@ -135,7 +138,7 @@ class AdminArticleSigleHandler(BaseHandler):
 
 
 class AdminImageHandler(BaseHandler):
-    
+
     @tornado.web.authenticated
     def post(self):
         _file = self.request.files.get('file', None)
@@ -150,7 +153,6 @@ class AdminImageHandler(BaseHandler):
         _id = bson.py3compat.text_type(image.id)
         image.url = self.reverse_url('file_image', _id)
         image.save()
-        d = image.image.read()
         out_data = dict(
             url=image.url,
             description=image.description,
@@ -160,7 +162,7 @@ class AdminImageHandler(BaseHandler):
         self.write(out_data)
         self.set_header('content-type', 'application/json')
 
-    @tornado.web.authenticated 
+    @tornado.web.authenticated
     def delete(self, id):
         image = ImageDoc.objects.get(id=id)
         image.image.delete()
@@ -181,8 +183,8 @@ class AdminCategoriesHandler(BaseHandler):
         name = self.get_argument('name')
         description = self.get_argument('description')
         category = Category(
-            name = name,
-            description = description
+            name=name,
+            description=description
         )
         try:
             category.save()
@@ -220,22 +222,23 @@ class AdminCategoryHandler(BaseHandler):
         self.write(dict(result=1))
         self.set_header('content-type', 'application/json')
 
+
 class AdminQuotesHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self, page=1, per_page=10):
-        quotes = Paginate(Quote.objects, page, per_page)
+        quotes = Quote.objects.paginate(page, per_page)
         self.render('admin/quotes.html', quotes=quotes)
 
     @tornado.web.authenticated
     def post(self, page=None):
         quote_body = self.get_argument('quote_body')
         quote_author = self.get_argument('quote_author')
-        
+
         quote = Quote()
         quote.body = quote_body
         quote.author = quote_author
-        
+
         try:
             quote.save()
         except:
@@ -265,22 +268,23 @@ class AdminQuoteHandler(BaseHandler):
             return
         self.redirect(self.reverse_url('admin_quotes', 1))
 
+
 class AdminNovelsHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self, page=1, per_page=10):
-        novels = Paginate(Novel.objects, page, per_page)
+        novels = Novel.objects.paginate(page, per_page)
         self.render('admin/novels.html', novels=novels)
 
     @tornado.web.authenticated
     def post(self, page=None):
         name = self.get_argument('name')
         description = self.get_argument('description')
-        
+
         novel = Novel()
         novel.name = name
         novel.description = description
-        
+
         try:
             novel.save()
         except:
@@ -300,11 +304,11 @@ class AdminNovelHandler(BaseHandler):
     def post(self, id):
         name = self.get_argument('name')
         description = self.get_argument('description')
-        
+
         novel = Novel.objects(id_no=id).first()
         novel.name = name
         novel.description = description
-        
+
         try:
             novel.save()
         except:
@@ -318,7 +322,7 @@ class AdminNovelCaptersHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self, page=1, per_page=10):
-        novel_chapters = Paginate(Chapter.objects, page, per_page)
+        novel_chapters = Chapter.objects.paginate(page, per_page)
         self.render('admin/novel_chapters.html', novel_chapters=novel_chapters)
 
 
@@ -330,34 +334,36 @@ class AdminNovelCapterHandler (BaseHandler):
         novels = Novel.objects.all()
         if id:
             novel_chapter = Chapter.objects.get(id_no=id)
-        self.render('admin/novel_chapter.html', novel_chapter=novel_chapter, novels=novels)
+        self.render('admin/novel_chapter.html', novel_chapter=novel_chapter,
+                    novels=novels)
 
     @tornado.web.authenticated
     def post(self, id=None):
         title = self.get_argument('title')
-        creat_time = self.get_argument('creat_time')
+        create = self.get_argument('create')
         active = int(self.get_argument('active', 1))
         novel = self.get_argument('novel')
         md_content = self.get_argument('md_content', '')
-        
+
         novel_chapter = Chapter()
         if id:
             novel_chapter = Chapter.objects.get(id_no=id)
         novel_chapter.title = title
         novel_chapter.active = active
-        novel_chapter.creat_time = creat_time
+        novel_chapter.create = create
         novel_chapter.md_content = md_content
         novel_chapter.html_content = markdown(md_content)
         novel_chapter.novel = Novel.objects(name=novel).first()
         novel_chapter.save()
-        self.redirect(self.reverse_url('admin_novel_chapter', novel_chapter.id_no))
+        self.redirect(self.reverse_url('admin_novel_chapter',
+                                       novel_chapter.id_no))
 
 
 class AdminSiglePagesHandler(BaseHandler):
 
     @tornado.web.authenticated
     def get(self, page=1, per_page=10):
-        sigle_pages = Paginate(SiglePage.objects(is_del=0), page, per_page)
+        sigle_pages = SiglePage.objects(is_del=0).paginate(page, per_page)
         self.render('admin/sigle_pages.html', sigle_pages=sigle_pages)
 
 
@@ -378,24 +384,26 @@ class AdminSiglePageHandler(BaseHandler):
                     description=img.description,
                     del_url=self.reverse_url('admin_image_del', _id)
                 ))
-        self.render('admin/sigle_page.html', sigle_page=sigle_page, images=images)
+        self.render('admin/sigle_page.html', sigle_page=sigle_page,
+                    images=images)
 
     @tornado.web.authenticated
     def post(self, slug=None):
         title = self.get_argument('title')
         _slug = self.get_argument('_slug', '')
         category = self.get_argument('category', '')
-        creat_time = self.get_argument('creat_time')
+        create = self.get_argument('create')
         md_content = self.get_argument('md_content', '')
-        translate = self.get_argument('translate','')
-        img_list = bson.json_util.loads(self.get_argument('img_list', "[]").replace("\'","\""))
-        
+        translate = self.get_argument('translate', '')
+        img_list = bson.json_util.loads(self.get_argument('img_list', "[]")
+                                            .replace("\'", "\""))
+
         sigle_page = SiglePage()
         if slug:
-            sigle_page= SiglePage.objects(slug=slug).first()
+            sigle_page = SiglePage.objects(slug=slug).first()
         sigle_page.title = title
         sigle_page.slug = slug if slug else _slug
-        sigle_page.creat_time = creat_time
+        sigle_page.create = create
         sigle_page.category = category
         sigle_page.md_content = md_content
         sigle_page.translate = translate
@@ -414,5 +422,3 @@ class AdminSiglePageHandler(BaseHandler):
         sigle_page.save()
         self.write(dict(result=1))
         self.set_header('content-type', 'application/json')
-
-
