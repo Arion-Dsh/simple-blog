@@ -12,7 +12,7 @@ class MyReader(mistune.Renderer):
         if sdec == 'None':
             sdec = ''
         out = """<div class='cont-img pos-r'>
-                <div class='cont-img-dec pos-a'>%s<p>%s</p></div>
+                <div class='cont-img-dec pos-a'><p>%s</p><p>%s</p></div>
                 <img src='%s' alt='%s' class="pure-img bdr-s"/></div>""" \
                 % (dec, sdec, url, dec)
         return out
