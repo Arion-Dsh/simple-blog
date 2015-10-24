@@ -7,7 +7,7 @@
   font-family: 'Noto Sans';
   font-style: normal;
   font-weight: 400;
-  src: local('Noto Sans'), local('NotoSans'), 
+  src: local('Noto Sans'), local('NotoSans'),
        url(fonts/NotoSans.woff2) format('woff2'),
        url(fonts/NotoSans.woff) format('woff'),
        url(fonts/NotoSans.ttf) format('truetype');
@@ -216,7 +216,7 @@ pre, code {
     text-align: center;
 }
 #main-cont .archives-list {
-    padding: 24px 0 0 0;
+    /*padding: 24px 0 0 0;*/
     margin: 16px 0 24px ;
     font-size: 16px;
 }
