@@ -25,7 +25,7 @@ class HomeHandler(FEBaseHandler):
             image = ImageDoc.objects(id__in=page.img_list).first()
         category = Category.objects(name='zh-hans').first()
         articles = Article.objects(category=category, active=1)\
-                          .order_by('-create_time').limte(5).all()
+                          .order_by('-create_time')[:5].all()
         self.render('home.html', page=page, articles=articles,
                     image=image, quote=quote)
 
