@@ -92,7 +92,7 @@ class FrontendViewsTest(BaseCase):
                       body)
 
     def test_article(self):
-        url = '/zh-hans/%s/%s' % (self.article_1.create_time\
+        url = '/zh-hans/%s/%s' % (self.article_1.create_time
                                   .strftime('%d-%m'), self.article_1.id_no)
         response = self.fetch(url)
         body = response.body.decode()

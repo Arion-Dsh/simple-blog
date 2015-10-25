@@ -200,7 +200,7 @@ pre, code {
     text-decoration: underline;
 }
 #main-cont .article-content p {
-    margin: 0;
+    margin: 0 0 16px 0;
 }
 #main-cont .article-content .cont-img {
     margin: 16px 0;

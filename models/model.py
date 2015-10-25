@@ -58,7 +58,7 @@ class Article(BaseArticle):
     meta = {
         'collection': 'article',
         'allow_inheritance': True,
-        'ordering': ['-create'],
+        'ordering': ['-create_time'],
     }
 
 

@@ -27,7 +27,7 @@
 			<a href="{{reverse_url('admin_article_edit', article.id_no)}}">{{article.title}}</a>
 		</div>
 		<div class="pure-u-1-6">
-		    {{article.category}}
+		    {{article.category.name}}
 		</div>
 		<div class="pure-u-1-12">
         	{% if article.active is 1 %}
