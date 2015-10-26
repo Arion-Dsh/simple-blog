@@ -64,7 +64,6 @@ pre {
 }
 
 code {
-    display: block;
     background-color: rgba(0, 0, 0, .1);
     border: 1px solid #e4e4e4;
     margin: 0 2px;
@@ -74,6 +73,7 @@ code {
 }
 
 pre code {
+    display: block;
     background-color: initial;
     border: none;
     padding: 0;
