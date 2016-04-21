@@ -20,6 +20,7 @@ from views.front_handlers import HomeHandler, ArticlesHandler, ArticleHandler, \
 # 链接数据库
 from mongoengine import connect
 db_name = 'blog_test'
+
 try:
     from local_settings import db_name
 except:

@@ -20,7 +20,11 @@ class BaseQuerySet(QuerySet):
         if page < 1:
             page = 1
         items = self.limit(per_page).skip((page-1)*per_page).all()
-        return Paginate(self, page, per_page, items)
+        if page == 1 and len(items) < per_page:
+            total = len(items)
+        else:
+            total = self.count()
+        return Paginate(self, page, per_page, items, total)
 
 
 class Document(Doc):
@@ -31,11 +35,11 @@ class Document(Doc):
 
 class Paginate(object):
 
-    def __init__(self, query, page, per_page, items):
+    def __init__(self, query, page, per_page, items, total):
         """docstring for __init__"""
         self.page = int(page)
         self.per_page = int(per_page)
-        self.total = len(items)
+        self.total = ltotal
         self.query = query
         self._list = items
 
