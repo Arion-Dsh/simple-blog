@@ -39,7 +39,7 @@ class Paginate(object):
         """docstring for __init__"""
         self.page = int(page)
         self.per_page = int(per_page)
-        self.total = ltotal
+        self.total = total
         self.query = query
         self._list = items
 
