@@ -71,7 +71,7 @@
 				{% for page in articles.iter_pages( left_edge=0, left_current=0,right_current=1, right_edge=0) %}
 					{%if page %}
 						{%if page != articles.page %}
-			    		<li><a class="pure-button" href="{{reverse_url('admin_articles', page)}}">{{page}}</a></li>
+                        <li><a class="pure-button" href="{{reverse_url('admin_articles', page)}}">{{page}}</a></li>
 						{%else%}
 			    		<li><a class="pure-button pure-button-active" href="{{reverse_url('admin_articles', page)}}">{{page}}</a></li>
 						{%end%}

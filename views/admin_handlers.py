@@ -115,7 +115,6 @@ class AdminArticleSigleHandler(BaseHandler):
                                         .replace("\'", "\""))
 
         article = Article()
-        print(create_time)
         if id:
             article = Article.objects.get(id_no=int(id))
         article.title = title

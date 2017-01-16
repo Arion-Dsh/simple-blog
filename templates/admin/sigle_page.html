@@ -17,7 +17,7 @@
                 <label for="slug">slug</label>
                 <input type="text" name="_slug"  value="{{sigle_page.slug or ''}}" {% if sigle_page.slug %} disabled {% end %} placeholder="slug" />
                 <label for="md_content"> md_content </label>
-                <textarea name="md_content" placeholder="markdown" rows="12" cols="40" required>{{sigle_page.md_content or ''}}</textarea>
+                <textarea name="md_content" placeholder="markdown" rows="12" cols="80" required>{{sigle_page.md_content or ''}}</textarea>
                 <button type="submit" class="pure-button pure-button-primary">提交</button>
 
             </fieldset>

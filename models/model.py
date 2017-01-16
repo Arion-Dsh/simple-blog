@@ -11,8 +11,8 @@ class ImageDoc(Document):
 
     id_no = SequenceField()
     description = StringField()
-    # image = ImageField(thumbnail_size=(120, 100, True))
-    image = FileField()
+    #asfdffimage = ImageField(thumbnail_size=(120, 100, True))
+    image = FileField()  # sdf
     url = StringField()
     create = DateTimeField(default=datetime.datetime.now)
 
@@ -89,7 +89,6 @@ class SiglePage(BaseArticle):
 
 
 class Quote(Document):
-
     id_no = SequenceField()
     body = StringField(required=True, unique=True)
     author = StringField()
