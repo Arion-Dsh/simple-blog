@@ -21,7 +21,7 @@
                 <label for="category">category </label>
                 <select  name='category'>
                    {% for category in categories%}
-                   <option value="{{category.name}}" {% if article.category.name == category.name %} selected {%end %}>{{category.name}}</option>
+                   <option value="{{category.name}}" {% if article.category and article.category.name == category.name %} selected {%end %}>{{category.name}}</option>
                    {% end %}
                 <label for="md_content"> md_content </label>
                 <textarea name="md_content" placeholder="markdown" rows="12" cols="80" required>{{article.md_content or ''}}</textarea>

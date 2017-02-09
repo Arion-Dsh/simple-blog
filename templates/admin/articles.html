@@ -2,21 +2,20 @@
 
 {%block name="main_body" %}
 <div class="pure-u-3-4 main-content" >
-         <div class=" pure-g items-header">
+    <div class=" pure-g items-header">
+        <h4  class="pure-u-5-6 items-title">Article</h4>
+        <div class="pure-u-1-6 header-plus">
+             <a href="{{reverse_url('admin_article_add')}}" class="pure-button button-success button-small">add</a>
+        </div>
+    </div>
 
-	        <h4  class="pure-u-5-6 items-title">Article</h4>
-	        <div class="pure-u-1-6 header-plus">
-	            <a href="{{reverse_url('admin_article_add')}}" class="pure-button button-success button-small">add</a>
-	        </div>
-	    </div>
-
-	<div class="pure-g items">
-		<div class="pure-u-1-6">
-			时间
-		</div>
-		<div class="pure-u-7-24">
-			标题
-		</div>
+    <div class="pure-g items">
+        <div class="pure-u-1-6">
+            时间
+        </div>
+        <div class="pure-u-7-24">
+        标题
+        </div>
 		<div class="pure-u-1-6">
 		    分类
 		</div>
@@ -25,7 +24,7 @@
 		</div>
 		<div class="pure-u-7-24">
 			操作
-		</div>
+        </div>
 	</div>
 	{%for article in articles._list %}
 	<div class="pure-g items">
@@ -45,8 +44,10 @@
 			<i class="fa fa-close"></i>
 			{% end %}
 		</div>
+
 		<div class="pure-u-7-24">
-		        <a  href="#" class="art-del" url-bind="{{reverse_url('admin_article_del', article.id_no)}}">
+		       
+            <a  href="#" class="art-del" url-bind="{{reverse_url('admin_article_del', article.id_no)}}">
 		            <i class="fa fa-trash"></i>delete
 		        </a>
 			<a href="{{reverse_url('admin_article_edit', article.id_no)}}">
