@@ -1,0 +1,15 @@
+{{ define "aside" }}
+<div class="pure-u-1-4 aside">
+	<div class="l-rbox">
+		<div class="pure-menu">
+			<ul class="pure-menu-list">
+				<li class="pure-menu-heading">hi ya.</li>
+				<li class="pure-menu-item"><a href='{{reverse "admin_home"}}' class="pure-menu-link">Home</a></li>
+				<li class="pure-menu-item"><a href='{{reverse "admin_articles"}}' class="pure-menu-link">Article</a></li>
+				<li class="pure-menu-item"><a href='{{reverse "admin_novels"}}' class="pure-menu-link">Novel</a></li>
+				<li class="pure-menu-item"><a href='{{reverse "admin_quotes"}}' class="pure-menu-link">Quote</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+{{end}}

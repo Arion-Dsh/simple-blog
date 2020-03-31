@@ -1,0 +1,24 @@
+{{define "title"}}{{(.Get "article").Title}} -- Arion's{{end}}
+{{define "body"}}
+{{$article := .Get "article"}}
+{{$quote := .Get "quote"}}
+<div class="pure-u-g">
+  <div class="pure-u-1">
+    <div class="main-block pos-r">
+        {{if not $quote.ID.IsZero}}
+        <div class="quote-block pos-a">
+            <p class="quote-body">{{$quote.Content}}</p>
+            <p class="quote-author">—— {{$quote.Author}}</p> 
+        </div>
+        {{end}}
+      <div class="article-header">
+        <h1>{{$article.Title}}</h1>
+        <p>{{$article.CreateTime.Format "06 Jan 2006"}}</p>
+      </div>
+      <div class="article-content">
+        {{$article.Content | markdown}}
+      </div>
+    </div>
+  </div>
+</div>
+{{end}}

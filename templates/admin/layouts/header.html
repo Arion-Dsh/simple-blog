@@ -1,0 +1,18 @@
+{{ define "header"}}
+<div class ="pure-g" id="header">
+	<div class="pure-u-1-2">
+		<h1>Arion's</h1>
+	</div>
+	<div class="pure-u-1-2">
+		{{$u := .Get "user"}}
+		<div class="pure-menu pure-menu-horizontal">
+				<a class="pure-menu-heading">{{$u.Email}}</a>
+				<ul class="pure-menu-list">
+					<li class="pure-menu-item">
+						<a href='{{reverse "admin_logout"}}' class="pure-menu-link">退出</a>
+					</li>
+				</ul>
+		</div>
+	</div>
+</div>
+{{end}}
