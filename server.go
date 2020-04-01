@@ -56,11 +56,11 @@ func main() {
 	e.Static("/static", "static")
 	e.File("/favicon.ico", "images/favicon.ico")
 
-	/*  // csrf */
-	// e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
-	// TokenLookup: "form:_csrf",
-	// CookieName:  "_csrf",
-	// }))
+	// csrf
+	e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
+		TokenLookup: "form:_csrf",
+		CookieName:  "_csrf",
+	}))
 
 	e.Validator = &CustomValidator{validator: validator.New()}
 
@@ -94,7 +94,7 @@ func main() {
 	e.POST(loginURL, handlers.AdminLoginPost)
 
 	admin := e.Group("/admin")
-	// admin.Use(handlers.VerifyAuth)
+	admin.Use(handlers.VerifyAuth)
 	admin.GET("", handlers.AdminHome).Name = "admin_home"
 	admin.POST("", handlers.AdminQuotePost)
 	admin.GET("/logout", handlers.AdminLogOut).Name = "admin_logout"
