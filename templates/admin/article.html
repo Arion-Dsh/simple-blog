@@ -22,8 +22,8 @@
                    <option>category</option>
                    <option value="zh-hans" {{if eq $article.Category "zh-hans"}}selected {{end}} >zh-hans</option>
                    <option value="en-us" {{if eq $article.Category "en-us"}}selected {{end}} >en-us</option>
-                   <option value="en-us" {{if eq $article.Category "life"}}selected {{end}} >life</option>
-                   <option value="en-us" {{if eq $article.Category "coding"}}selected {{end}} >coding</option>
+                   <option value="life" {{if eq $article.Category "life"}}selected {{end}} >life</option>
+                   <option value="coding" {{if eq $article.Category "coding"}}selected {{end}} >coding</option>
                 <label for="content"> md_content </label>
                 <textarea name="content" placeholder="markdown" rows="18" cols="100" required>{{$article.Content}}</textarea>
                 <button type="submit" class="pure-button pure-button-primary">提交</button>

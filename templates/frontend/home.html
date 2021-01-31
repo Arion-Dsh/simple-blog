@@ -20,7 +20,7 @@
          <h2>最新文章</h2>
         <ul>
             {{range .Get "articles"}}
-            <li><i>{{.CreateTime.Format "02 Jan 2006"}}</i> <a href='{{reverse "article" "zh-hans" .ID.Hex}}'>{{.Title}}</a> </li>
+            <li><i>{{.CreateTime.Format "02 Jan 2006"}}</i> <a href='{{reverse "article" "life" .ID.Hex}}'>{{.Title}}</a> </li>
             {{end}}
         </ul>
     </div>

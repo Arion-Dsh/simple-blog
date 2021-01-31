@@ -132,7 +132,6 @@ func AdminArticleEdit(c echo.Context) error {
 			a.DelImg(imgID)
 		}
 	}
-	log.Print(a)
 
 	db.UpdateOne(a, bson.M{"_id": id})
 

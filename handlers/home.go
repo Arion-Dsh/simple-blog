@@ -23,7 +23,7 @@ func Home(c echo.Context) error {
 	find := options.Find().SetLimit(5).SetSort(bson.M{"create_time": -1})
 	cur, _ := db.C(new(models.Article)).Find(
 		ctx,
-		bson.M{"active": true, "is_del": false, "category": "zh-hans"},
+		bson.M{"active": true, "is_del": false, "category": "life"},
 		find,
 	)
 
