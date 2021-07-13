@@ -1,0 +1,234 @@
+html {
+    height: 100%;
+}
+
+body {
+  font: 400 18px/1.62 "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
+  color: #444443;
+  min-height: 100%;
+}
+.wrapper,
+.pure-menu-link {
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+/* ------------------------
+ * Layout Styles
+ *-------------------------
+*/
+
+.wrapper{
+    max-width:960px;
+    min-height: 100vh;
+	padding:0 5px;
+    margin:0 auto;
+    position: relative;
+}
+
+/* Apply the .box class on the immediate parent of any grid element (pure-u-*) to apply some padding. */
+.l-box {
+    padding: 1.3em;
+}
+
+.l-vbox {
+    padding: 1.3em 0;
+}
+
+.l-hbox {
+    padding: 0 1.3em;
+}
+.l-lbox{
+	padding-left: 1.3em;
+}
+.l-rbox{
+	padding-right: 1.3em;
+}
+.l-centered {
+    text-align: center;
+}
+
+/* --------------------------
+ * Element Styles
+ * --------------------------
+*/
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    color: rgb(75, 75, 75);
+}
+h3 {
+    font-size: 1.25em;
+}
+h4 {
+    font-size: 1.125em;
+}
+
+a {
+    color: #3b8bba; /* block-background-text-normal */
+    text-decoration: none;
+}
+
+a:visited {
+    color: #265778; /* block-normal-text-normal */
+}
+
+dt {
+    font-weight: bold;
+}
+dd {
+    margin: 0 0 10px 0;
+}
+textarea {
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.hidden{
+	display: none !important; 
+	visibility: hidden;
+}
+
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-success {
+    background: rgb(28, 184, 65); /* this is a green */
+}
+
+.button-error {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
+p.button-error{
+	border-radius: 0;
+	margin: 5px 0;
+	padding: 5px;
+	font-size: 80%;
+}
+.button-warning {
+    background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.button-secondary {
+    background: rgb(66, 184, 221); /* this is a light blue */
+}
+.button-xsmall {
+    font-size: 70%;
+}
+.button-small {
+    font-size: 85%;
+}
+.button-large {
+    font-size: 110%;
+}
+.button-xlarge {
+    font-size: 125%;
+}
+/* --------------------------
+ * Header Module Styles
+ * --------------------------
+*/
+
+#header {
+
+     margin: 0;
+     color: #333;
+     padding: 1em 0;
+     border-bottom: 1px solid #eee;
+ }
+	#header h1{
+		margin: 0;
+		line-height: 1.1875em;
+	}
+	#header .pure-menu{
+		text-align: right;
+	}
+
+	
+/* --------------------------
+ * main-Content Module Styles
+ * --------------------------
+*/
+
+#content{
+    margin: 2em 0;
+    padding-bottom: 12em;
+}
+
+	.aside{
+		margin-bottom: 1em;
+	}
+    .main-content {
+        font-size: 14px;
+    }
+        .main-content .add-quote button {
+            margin: .25em 0;
+        }
+        .main-content .items div {
+            margin-bottom: .25em;
+        }
+        .main-content .items-title {
+            margin-top: 0;
+        }
+ * paginator Module Styles
+ * --------------------------
+*/
+   
+#paginator{
+	text-align: center;
+}
+
+.pure-paginator {
+    padding: 0 60px 0 0;
+    list-style: none;
+    text-align: center;
+}
+.pure-paginator li {
+    display: inline;
+}
+#footer{
+	margin: 3em 0 0;
+	padding: 1em 0;
+	border-top: 1px solid #eee;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
+
+
+    .legal-license,
+    .legal-copyright {
+        margin: 0;
+        font-size: 80%;
+    }
+
+    .legal-copyright,
+    .legal-links {
+        text-align: right;
+        font-size: 80%
+    }
+
+    .legal-links {
+        list-style: none;
+        margin: 0 0 5px 0;
+    }
+	.legal-logo {
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	font-size: 80%;
+	}
+		.legal p{ margin-bottom: 5px;}
+		
+

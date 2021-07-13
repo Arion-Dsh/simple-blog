@@ -1,0 +1,50 @@
+{{define "title"}}列表{{end}}
+{{define "body"}}
+{{ $l := len (.Get "articles")}}
+{{ $cid := .ParamValue "cid"}}
+<div class="pure-u-1">
+    <div class="main-block">
+    <div class="archives-list">
+        <div class="archives-header">
+            <h2>{{$cid}}</h2>
+            {{if eq "life" $cid}}
+            <p>That's all talk about live, life and other staff.</p>
+            {{end}}
+            {{if eq "language" $cid}}
+            <p>I just learn language in here.</p>
+						{{end}}
+					  {{if eq "coding" $cid}}
+            <p>Hi, there all about program. </p>
+            {{end}}
+					  {{if eq "people" $cid}}
+            <p>wonderful people.</p>
+            {{end}}
+
+        </div>
+        {{ if eq $l 0 }}
+           <p>no article yet!</p>
+        {{end}}
+        <ul>
+            {{range .Get "articles"}}
+            <li><i>{{.CreateTime.Format "02 Jan 2006"}}</i> <a href='{{reverse "article" $cid .ID.Hex}}'>{{.Title}}</a></li>
+            {{end}}
+        </ul>
+    </div>
+    <div class="pagination">
+        <div class="pure-u-1">
+          <ul class="pure-menu pure-menu-horizontal">
+              {{ if .HasPrevPage}}
+              <li class="pure-menu-item">
+                  <a class="pure-menu-link" href="{{.PrevURL}}">&#171; Prev Page</a>
+              </li>
+              {{else}}
+              <li class="pure-menu-item">
+                  <a class="pure-menu-link">first Page</a>
+              </li>
+              {{end}}
+              <li class="pure-menu-item"><a class="pure-menu-link" href="{{.NextURL}}">Next Page &#187;</a></li>
+          </ul>
+        </div>
+    </div>
+  </div>
+{{end}}

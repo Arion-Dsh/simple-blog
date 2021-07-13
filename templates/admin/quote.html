@@ -1,0 +1,22 @@
+{{define "body" }}
+{{$quote := .Get "quote"}}
+<div class="pure-u-3-4 main-content" >
+    <div class="l-box">
+        <form method="post" class="pure-form pure-form-stacked">
+          <input type="hidden" name="_csrf" value='{{.Get "csrf"}}'>
+        <legend>Quote Edit</legend>
+        <div class=" pure-g add-category">
+            <div class="pure-u-3-5">
+                <input type="text" name="content" value="{{$quote.Content}}" placeholder="quote" class="pure-u-23-24">
+            </div>
+            <div class="pure-u-1-5">
+                <input type="text" name="author" value="{{$quote.Author}}" placeholder="author" class="pure-u-23-24">
+            </div>
+            <div class="pure-u-1-5">
+                <button type="submit" class="pure-button pure-button-primary" >确定</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+{{end}}

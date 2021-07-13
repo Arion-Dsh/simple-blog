@@ -1,0 +1,24 @@
+{{define "body"}}
+<div class="pure-u-3-4 main-content">
+        {{$c := .Get "chapter"}}
+        <form class="pure-form pure-form-stacked" method="post">
+            <input type="hidden" name="_csrf" value='{{.Get "csrf"}}'>
+            <fieldset>
+                <legend>chapter</legend>
+                <label for="title">title</label>
+                <input type="text" name="title" id ="title" value="{{$c.Title}}" placeholder="title" required>
+                <label for="create_time">create</label>
+                <input type="text" name="create_time" id="create_time" value='{{$c.CreateTime.Format "2006-01-02 15:04:05"}}' placeholder="create_time"/>
+                <label for="active">active</label>
+                <select id="active" name='active'>
+                    <option value="true" {{if $c.Active}} selected {{end}}>yes</option>
+                    <option value="false" {{if not $c.Active }} selected {{end}}>no</option>
+                </select>
+                <label for="md_content">content</label>
+                <textarea name="content" id="md_content" placeholder="markdown" rows="12" cols="80" required>{{$c.Content}}</textarea>
+                <button type="submit" class="pure-button pure-button-primary">提交</button>
+
+            </fieldset>
+        </form>
+</div>
+{{end}}

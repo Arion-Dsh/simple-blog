@@ -1,0 +1,74 @@
+{{define "body"}}
+{{$article := .Get "article"}}
+<div class="pure-u-3-4 main-content">
+        <form class="pure-form pure-form-stacked article-form" method="post">
+
+            <fieldset>
+                <legend >Article</legend>
+                <input type="hidden" name="_csrf" value='{{.Get "csrf"}}'>
+                <label for="title"> title </label>
+                <input type="text" name="title" value="{{$article.Title}}" placeholder="title" required>
+                <label for="slug"> slug </label>
+                <input type="text" name="slug" value="{{$article.Slug}}" placeholder="slug" >
+                <label for="create_time">create </label>
+                <input type="text" name="create_time" value='{{$article.CreateTime.Format "2006-01-02 15:04:05"}}' placeholder="create_time"/>
+                <label>active</label>
+                <select id="active" name='active'>
+                    <option value="true" {{if $article.Active}} selected {{end}}>yes</option>
+                    <option value="false" {{if not $article.Active }} selected {{end}}>no</option>
+                </select>
+                <label for="category">category </label>
+                <select name='category'>
+                   <option>category</option>
+                   <option value="en-us" {{if eq $article.Category "lang"}}selected {{end}} >language</option>
+                   <option value="en-us" {{if eq $article.Category "people"}}selected {{end}} >people</option>
+                   <option value="life" {{if eq $article.Category "life"}}selected {{end}} >life</option>
+                   <option value="coding" {{if eq $article.Category "coding"}}selected {{end}} >coding</option>
+                <label for="content"> md_content </label>
+                <textarea name="content" placeholder="markdown" rows="18" cols="100" required>{{$article.Content}}</textarea>
+                <button type="submit" class="pure-button pure-button-primary">提交</button>
+
+            </fieldset>
+        </form>
+        <div class="pure-g">
+            <div class="pure-u-1-4">
+                    <form class="pure-form pure-form-stacked pure-g" method="post" enctype="multipart/form-data">
+                    <fieldset class="pure-u-1">
+                        <legend>添加图片</legend>
+                        <input type="hidden" name="is_update_file" value="1">
+                        <input type="hidden" name="_csrf" value='{{.Get "csrf"}}'>
+                        <input type="file" name="file" required class="pure-u-23-24"/>
+    
+                        <button type="submit" class="pure-button pure-button-primary">上传</button>
+    
+                    </fieldset>
+                </form>
+            </div>
+            <div class="pure-u-3-4">
+                <div class="l-box img-block">
+                    {{range $article.Images}}
+                    <div class="pure-g id-{{.}}" >
+                        <div class="pure-u-1-4">
+                            <img class="pure-img" src='{{reverse "get_fsfile" .}}'>
+                        </div>
+                        <div class="pure-u-1-2">
+                            <span class='img-url'>url：{{reverse "get_fsfile" .}}</span>
+    
+                        </div>
+                        <div class="pure-u-1-4">
+                            <div class="l-box ">
+                            <form method="post">
+                                <input type="hidden" name="is_del_file" value="1">
+                                <input type="hidden" name="img_id" value="{{.}}">
+                                <input type="hidden" name="_csrf" value='{{$.Get "csrf"}}'>
+                            <button class="pure-button button-error button-small img-del" type="submit">delete</button>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    {{end}}
+                </div>
+             </div>
+        </div>
+</div>
+{{end}}

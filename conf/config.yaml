@@ -1,0 +1,26 @@
+deploy:
+  secretkey: "Kate&Arion"
+  server:
+    supUsers:
+      - "einmagic@gmail.com"
+    loginURL: "/admin/login"
+    port: ":8000"
+    debug: true
+  mail:
+    server: "smtp.qq.com"
+    port: ":587"
+    user: "543186939@qq.com"
+    pwd: "ddrpbvzvulyrbeba"
+production:
+  secretkey: "Kate&Arion"
+  server:
+    supUsers:
+      - "einmagic@gmail.com"
+    loginURL: "/admin/login"
+    port: ":8000"
+    debug: false
+  mail:
+    server: "smtp.qq.com"
+    port: ":587"
+    user: "543186939@qq.com"
+    pwd: "ddrpbvzvulyrbeba"

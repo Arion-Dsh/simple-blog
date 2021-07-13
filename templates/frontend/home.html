@@ -1,0 +1,32 @@
+{{define "title"}}Arion's{{end}}
+{{define "body"}}
+{{$page := .Get "page"}}
+{{$quote := .Get "quote"}}
+<div class="pure-u-1 pos-r">
+    {{if not $quote.ID.IsZero}}
+    <div class="quote-block pos-a">
+        <p class="quote-body">{{$quote.Content}}</p>
+        <p class="quote-author">—— {{$quote.Author}}</p> 
+    </div>
+    {{end}}
+    <div class="home-img bdr-s">
+        
+        {{if ge (len $page.Images) 1}}
+            <img src= '{{reverse "get_fsfile" (index $page.Images 0)}}' class="pure-img"/>
+        {{end}}
+    </div>
+    <div class="main-block">
+        <div class="home-items">
+         <h2>最新文章</h2>
+        <ul>
+            {{range .Get "articles"}}
+            <li><i>{{.CreateTime.Format "02 Jan 2006"}}</i> <a href='{{reverse "article" "life" .ID.Hex}}'>{{.Title}}</a> </li>
+            {{end}}
+        </ul>
+    </div>
+    <div class="article-content">
+        {{$page.Content | markdown}}
+    </div>
+    </div>
+</div>
+{{end}}

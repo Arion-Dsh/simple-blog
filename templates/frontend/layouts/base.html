@@ -1,0 +1,93 @@
+{{ define "base"}}
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{block "title" .}}Arion's{{end}}</title>
+		<link rel="shortcut icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/pure-min.css">
+    <link rel="stylesheet" href="/static/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/base.css">
+</head>
+<body>
+<div id="header" class="bs-s">
+    <div class="grid-cont">
+        <div class="pure-g header-cont">
+            <div class="pure-u-1-4">
+                <div class="logo">
+                    <h1><a href="/">Arion's</a></h1>
+                </div>
+                </div>
+            <div class="pure-u-3-4">
+                <div class="pure-menu pure-menu-horizontal main-menu">
+                <ul class="pure-menu-list main-menu-list">
+                    <li class="pure-menu-item">
+                        <a href='{{reverse "articles" "life"}}' class="pure-menu-link">Life</a>
+                    </li>
+                    <li class="pure-menu-item">
+                        <a href='{{reverse "articles" "coding"}}' class="pure-menu-link">Coding</a>
+                    </li>
+                    <li class="pure-menu-item">
+                        <a href='{{reverse "novel" "江湖"}}' class="pure-menu-link">Novel</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="main-cont">
+    <div class="grid-cont">
+        {{block "body" .}} {{end}}
+    </div>
+</div>
+<div id="footer">
+    <div class="grid-cont">
+        <div class="pure-g" >
+            <!--<div class="legal"> -->
+                <div class="pure-u-2-5">
+                    <div class="l-box">
+												<!-- <p class="legal-license"> -->
+												<!-- </p> -->
+                        <p class="legal-license">
+                            <!-- All code under the <a href="http://opensource.org/licenses/MIT" target="_black">MIT License</a>.<br /> -->
+														<br/>
+                            All article under the <a href="https://creativecommons.org/licenses/by/4.0/deed.en" traget="_black"> CC BY 4.0 </a>.
+                        </p>
+                    </div>
+                </div>
+          
+                <div class="pure-u-1-5">
+                    <div class="l-box legal-logo">
+                        <a href="/">
+                            arion's life!
+                        </a>
+                    </div>
+                </div>
+          
+                <div class="pure-u-2-5">
+                    <div class="l-box">
+                        <ul class="legal-links pure-g">
+                            <li class="pure-u-1">
+                                <a href="https://github.com/Arion-Dsh" traget="_black">GitHub Project</a>
+                            </li>
+                            <!--
+                            <li class="pure-u-1-2">
+                                <a href="#">豆瓣</a>
+                            </li>
+                            -->
+                        </ul>
+          
+                        <p class="legal-copyright">
+                            &copy; Arion. All rights reserved.
+                        </p>
+                    </div>
+                </div>
+            <!--</div> -->
+          </div>
+    </div>
+</div>
+</body>
+</html>
+{{end}}

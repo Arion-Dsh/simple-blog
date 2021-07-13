@@ -1,0 +1,72 @@
+{{define "body"}}
+{{$n := .Get "novel"}}
+<div class="pure-u-3-4 main-content">
+        <div class=" pure-g items-header">
+               <h3  class="pure-u-5-6 items-title">{{$n.Name}} Chapters</h3>
+               <div class="pure-u-1-6 header-plus">
+                   <a href='{{reverse "admin_chapter_new" $n.Name}}' class="pure-button button-success">add</a>
+               </div>
+         </div>
+       <div class="pure-g items">
+   
+           <div class="pure-u-1-6">
+               create
+           </div>
+           <div class="pure-u-3-8">
+               title
+           </div>
+           <div class="pure-u-1-6">
+               novel name
+           </div>
+           <div class="pure-u-1-12">
+               active
+           </div>
+           <div class="pure-u-5-24">
+               settings
+           </div>
+       </div>
+       <hr/>
+       {{range .Get "chapters"}}
+       <div class="pure-g items">
+           <div class="pure-u-1-6">
+               {{.CreateTime.Format "02 Jan 2006"}}
+           </div>
+           <div class="pure-u-3-8">
+               <a href='{{reverse "admin_chapter_edit" $n.Name .ID.Hex}}'>{{.Title}}</a>
+           </div>
+           <div class="pure-u-1-6">
+               {{$n.Name}}
+           </div>
+           <div class="pure-u-1-12">
+               {{if .Active}}
+               <i class="fa fa-check"></i>
+               {{else}}
+               <i class="fa fa-close"></i>
+               {{end}}
+           </div>
+           <div class="pure-u-5-24">
+               <a class="pure-button button-secondary button-xsmall" href='{{reverse "admin_chapter" $n.Name .ID.Hex}}'>
+                   <i class="fa fa-wrench"></i>edit
+               </a>
+           </div>
+       </div>
+       {{end}}
+   
+       <div class="pure-g items-footer">
+           <div class="pure-u-1">
+               <ul class="pure-paginator">
+                   {{if.HasPrevPage}}
+                   <li>
+                       <a class="pure-button prev" href="{{.PrevURL}}">&#171; Pre Page</a>
+                   </li>
+                   {{else}}
+                   <li>
+                        <a class="pure-button prev">First Page</a>
+                    </li>
+                   {{end}}
+                   <li><a class="pure-button next" href="{{.NextURL}}">Next Page &#187;</a></li>
+               </ul>
+           </div>
+       </div>
+   </div>
+{{end}}

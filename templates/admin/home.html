@@ -1,0 +1,40 @@
+{{define "body"}}
+<div class="pure-u-3-4 main-content">
+        <form method="post" class="pure-form pure-form-stacked">
+                <legend>Add Quote</legend>
+                <div class=" pure-g add-category">
+                    <input type="hidden" name="_csrf" value='{{.Get "csrf"}}'>
+                    <div class="pure-u-3-5">
+                        <input type="text" name="content" placeholder="quote" class="pure-u-23-24">
+                    </div>
+                    <div class="pure-u-1-5">
+                        <input type="text" name="author" placeholder="author" class="pure-u-23-24">
+                    </div>
+                    <div class="pure-u-1-5">
+                        <button type="submit" class="pure-button pure-button-primary" > 确定</button>
+                    </div>
+                </div>
+            </form>
+     <h3 class="items-title">Articles</h3>
+    {{range .Get "articles"}}
+	<div class="pure-g items">
+		<div class="pure-u-1-6">
+			{{.CreateTime.Format "02 Jan 15:04"}}
+		</div>
+		<div class="pure-u-7-12">
+			<a href='{{reverse "admin_article" .ID.Hex}}'>{{.Title}}</a>
+		</div>
+		<div class="pure-u-1-6">
+		    {{.Category}}
+		</div>
+		<div class="pure-u-1-12">
+        	{{if .Active}}
+			<i class="fa fa-check"></i>
+			{{else}}
+			<i class="fa fa-close"></i>
+			{{end}}
+		</div>
+	</div>
+	{{end}}
+</div>
+{{end}}

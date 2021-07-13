@@ -1,0 +1,23 @@
+{{define "body"}}
+<div class="wrapper">
+    <div class="pure-g" id="content">
+        <div class="pure-u-1 main-content" >
+            <form method="post" class="pure-form pure-form-stacked">
+            <legend>Login</legend>
+            <input type="hidden" name="_csrf" value='{{.Get "csrf"}}'>
+            <div class=" pure-g add-category">
+                <div class="pure-u-1-2">
+                    <input type="text" name="email" placeholder="email" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-1-2">
+                    <input type="password" name="passwd" placeholder="password" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-1">
+                    <button type="submit" class="pure-button pure-button-primary" > submit</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{end}}

@@ -1,0 +1,61 @@
+{{define "body"}}
+<div class="pure-u-3-4 main-content">
+        <form method="post" class="pure-form pure-form-stacked">
+            <input type="hidden" name="_csrf" value='{{.Get "csrf"}}'>
+            <legend>Add Novel</legend>
+            <div class=" pure-g add-category">
+                <div class="pure-u-1-5">
+                    <input type="text" name="name" placeholder="name" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-3-5">
+                    <input type="text" name="description" placeholder="description" class="pure-u-23-24">
+                </div>
+                <div class="pure-u-1-5">
+                    <button type="submit" class="pure-button pure-button-primary" > 确定</button>
+                </div>
+            </div>
+        </form>
+      <div class="pure-g items categories">
+          <h3 class="pure-u-1 items-title">novels</h3>
+          <div class='pure-u-1-5'>
+                Name
+            </div>
+            <div class="pure-u-3-5">
+                Description
+            </div>
+            <div class='pure-u-1-5'>
+                settings
+            </div>
+          {{ range .Get "novels"}}
+          <div class='pure-u-1-5'>
+              <a href='{{ reverse "admin_chapters" .Name}}'>{{.Name}}</a>
+          </div>
+          <div class="pure-u-3-5">
+              {{.Description}}
+          </div>
+          <div class="pure-u-1-5">
+          <a class="pure-button button-secondary button-xsmall" href='{{reverse "admin_novel" .ID.Hex}}'>
+            <i class="fa fa-wrench"></i>edit
+          </a>
+          </div>
+          {{end}}
+      </div>
+      <div class="pure-g items-footer">
+		<div class="pure-u-1">
+			<ul class="pure-paginator">
+				{{if .HasPrevPage}}
+			    <li>
+					<a class="pure-button prev" href="{{.PrevURL}}">&#171; Pre Page</a>
+                </li> 
+                {{else}}
+                    <li>
+                        <a class="pure-button prev" href="">First Page</a>
+                    </li> 
+				{{end}}
+				
+			    <li><a class="pure-button next" href="{{.NextURL}}">&#187;</a></li>
+			</ul>
+		</div>
+    </div>
+</div>
+{{end}}

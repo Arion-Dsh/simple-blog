@@ -1,0 +1,57 @@
+{{ define "base"}}
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>arion's blog admin</title>
+    <link rel="stylesheet" href="/static/pure-min.css">
+    <link rel="stylesheet" href="/static/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/admin/style_admin.css">
+</head>
+<body>
+	<div class="wrapper">
+        {{block "header" .}} {{end}}
+		<div class="pure-g" id="content">
+            {{block "aside" .}} {{end}}
+            {{block "body" .}} {{end}}
+        </div>
+        <div class="pure-g" id="footer">
+            <div class="pure-u-2-5">
+                <div class="l-box">
+                    <p class="legal-license">
+                        <!-- All code under the <a href="http://opensource.org/licenses/MIT">MIT License</a>.<br /> -->
+                        
+                        All article under the <a href="https://creativecommons.org/licenses/by/4.0/deed.en"> CC BY 4.0 </a>.
+                    </p>
+                </div>
+            </div>
+        
+            <div class="pure-u-1-5">
+                <div class="l-box legal-logo">
+                    <a href="#">
+                        arion's life!
+                    </a>
+                </div>
+            </div>
+        
+            <div class="pure-u-2-5">
+                <div class="l-box">
+                    <ul class="legal-links pure-g">
+                        <li class="pure-u-1-2">
+                            <a href="#">GitHub Project</a>
+                        </li>
+                        <li class="pure-u-1-2">
+                            <a href="#">豆瓣</a>
+                        </li>
+                    </ul>
+        
+                    <p class="legal-copyright">
+                        &copy; Arion. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{{end}}

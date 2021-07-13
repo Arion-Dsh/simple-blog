@@ -1,0 +1,81 @@
+
+{{define "body"}}
+<div class="pure-u-3-4 main-content" >
+        <div class=" pure-g items-header">
+            <h4  class="pure-u-5-6 items-title">Article</h4>
+            <div class="pure-u-1-6 header-plus">
+                 <a href='{{reverse "admin_article_new"}}' class="pure-button button-success button-small">add</a>
+            </div>
+        </div>
+    
+        <div class="pure-g items">
+            <div class="pure-u-1-6">
+                时间
+            </div>
+            <div class="pure-u-7-24">
+            标题
+            </div>
+            <div class="pure-u-1-6">
+                分类
+            </div>
+            <div class="pure-u-1-12">
+                active
+            </div>
+            <div class="pure-u-7-24">
+                操作
+            </div>
+        </div>
+        
+        {{ range .Get "articles"}}
+        <div class="pure-g items">
+            <div class="pure-u-1-6">
+                {{.CreateTime.Format "02 Jan 2006" }}
+            </div>
+            <div class="pure-u-7-24">
+                <a href='{{reverse "admin_article" .ID.Hex}}'>{{.Title}}</a>
+            </div>
+            <div class="pure-u-1-6">
+                {{.Category}}
+            </div>
+            <div class="pure-u-1-12">
+                {{if .Active}}
+                <i class="fa fa-check"></i>
+                {{else}}
+                <i class="fa fa-close"></i>
+                {{end}}
+            </div>
+    
+            <div class="pure-u-7-24">
+                   
+                <!-- <a  href="#" class="art-del" url-bind="#">
+                        <i class="fa fa-trash"></i>delete
+                    </a> -->
+                <a href='{{reverse "admin_article" .ID.Hex}}'>
+                    <i class="fa fa-wrench"></i>edit
+                </a>
+                <a href='{{reverse "article" .Category .ID.Hex}}' target="_back">
+                    <i class="fa fa-share"></i>show
+                </a>
+            </div>
+        </div>
+        {{end}}
+    
+        <div class="pure-g articles-footer">
+          
+            <div class="pure-u-1">
+                <ul class="pure-paginator">
+                    {{if .HasPrevPage}}
+                        <li>
+                            <a class="pure-button prev" href="{{.PrevURL}}">&#171; Pre Page</a>
+                        </li>
+                    {{else}}
+                        <li>
+                            <a class="pure-button prev" >First Page</a>
+                        </li>
+                    {{end}}
+                    <li><a class="pure-button next" href="{{.NextURL}}">Next Page &#187;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{{end}}
