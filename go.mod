@@ -3,7 +3,7 @@ module katea_blog
 go 1.16
 
 require (
-	github.com/arion-dsh/jvmao v0.1.0
+	github.com/arion-dsh/jvmao v0.1.2
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
@@ -16,4 +16,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/arion-dsh/jvmao => /home/arion/Develop/jvmao
+// replace github.com/arion-dsh/jvmao => /home/arion/Develop/jvmao
